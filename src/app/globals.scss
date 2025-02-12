@@ -9,23 +9,28 @@ body{
   justify-content: center;
   align-items: center;
   svg{
+    overflow: visible;
     width: 90%;
     max-width: 800px;
-    polygon{
-      animation: move1 2s infinite alternate;
-    }
-    g{
-      animation: move2 2s infinite alternate;
-    }
   }
 }
 
-@keyframes move1 {
-  0%   {transform: translateY(3%);}
-  100% {transform: translateY(-3%);}
+.print{
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: black;
+  padding: 5px 20px;
+  color: white;
+  font-family: helvetica;
 }
 
-@keyframes move2 {
-  0%   {transform: translateY(-3%);}
-  100% {transform: translateY(3%);}
+@page {
+  size: A4 landscape;
+}
+
+@media print{
+  .print{
+    display: none;
+  }
 }
