@@ -3,29 +3,61 @@
 import { useEffect } from 'react';
 
 const Hero = () => {
-  const getRandomOffset = () => (Math.random() * 4 - 2) + '%'; // Random value between -2% and 2%
-  const getRandomOffset2 = () => (Math.random() * 2 - 1) + '%'; // Random value between -1% and 1%
+  const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%'; // Random between -2% and 2%, scaled
+const getRandomOffset2 = (factor = 1) => (Math.random() * 4 - 2) * factor + '%'; // Random between -1% and 1%, scaled
+const getRandomOffset3 = (factor = 1) => (Math.random() * 1 - 1) * factor + '%'; // Random between -1% and 1%, scaled
 
-  useEffect(() => {
-    const polygons = document.querySelectorAll('.hero svg polygon');
-    const groups = document.querySelectorAll('.hero svg path');
-  
-    const updatePositions = () => {
-      polygons.forEach(polygon => {
-        polygon.style.transform = `translate(${getRandomOffset2()}, ${getRandomOffset()})`;
+useEffect(() => {
+  const group1 = document.querySelector('#group1');
+  const polygons1 = document.querySelectorAll('#group1 polygon');
+  const path1 = document.querySelectorAll('#group1 path');
+  const group2 = document.querySelector('#group2');
+  const polygons2 = document.querySelectorAll('#group2 polygon');
+  const path2 = document.querySelectorAll('#group2 path');
+
+  let timeElapsed = 0;
+  const cycleDuration = 5000; // 5 seconds
+  const updateInterval = 100; // Every 100ms
+
+  const updatePositions = () => {
+    // Normalize time into a 0 → π cycle for a sine wave transition
+    const progress = (timeElapsed / cycleDuration) * Math.PI;
+    const factor = Math.sin(progress); // Smooth in-out transition
+
+    if (group1) {
+      polygons1.forEach(polygon => {
+        polygon.style.transform = `translateX(${getRandomOffset(factor)})`;
       });
-  
-      groups.forEach(group => {
-        group.style.transform = `translateY(${getRandomOffset()})`;
+      path1.forEach(path => {
+        path.style.transform = `translateY(${getRandomOffset3(factor)})`;
       });
-    };
+    }
+
+    if (group2) {
+      polygons2.forEach(polygon => {
+        polygon.style.transform = `translateY(${getRandomOffset(factor)})`;
+      });
+      path2.forEach(path => {
+        path.style.transform = `translateY(${getRandomOffset2(factor)})`;
+      });
+    }
+
+    // Update time
+    timeElapsed += updateInterval;
+    if (timeElapsed >= cycleDuration) {
+      timeElapsed = 0; // Reset after 5 seconds
+    }
+  };
+
+  updatePositions(); // Set initial positions
+
+  const interval = setInterval(updatePositions, updateInterval); // Update every 100ms
+
+  return () => clearInterval(interval); // Cleanup on unmount
+}, []);
+
+
   
-    updatePositions(); // Set initial positions
-  
-    const interval = setInterval(updatePositions, 100); // Change position every second
-  
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
 
   function print(){
     window.print();
@@ -35,7 +67,7 @@ const Hero = () => {
   return (
     <div className="hero">
       <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 793.65 460.12">
-
+      <g id="group1">
     <polygon points="70.27 18.36 46.62 18.36 46.62 25.65 40.55 25.65 40.55 35.72 76.28 35.72 76.28 25.65 70.27 25.65 70.27 18.36" />
     <polygon points="34.55 54.09 10.9 54.09 10.9 61.38 4.83 61.38 4.83 71.45 40.55 71.45 40.55 61.38 34.55 61.38 34.55 54.09" />
     <polygon points="105.99 54.09 82.34 54.09 82.34 61.38 76.28 61.38 76.28 71.45 112 71.45 112 61.38 105.99 61.38 105.99 54.09" />
@@ -152,6 +184,8 @@ const Hero = () => {
     <path d="m607.86,159.31c9.35,0,17.03-7.23,17.86-16.41h-35.72c.83,9.18,8.51,16.41,17.86,16.41Z" />
     <path d="m700.57,159.31c9.35,0,17.03-7.23,17.86-16.41h-35.73c.84,9.18,8.51,16.41,17.86,16.41Z" />
     <path d="m736.29,159.31c9.35,0,17.03-7.23,17.86-16.41h-35.72c.83,9.18,8.51,16.41,17.86,16.41Z" />
+    </g>
+    <g id="group2">
     <polygon points="18.41 215.38 18.41 239.1 25.73 239.1 25.73 245.18 35.82 245.18 35.82 209.36 25.73 209.36 25.73 215.38 18.41 215.38" />
     <path d="m16.46,227.27c0-9.37-7.25-17.08-16.46-17.91v35.82c9.21-.84,16.46-8.54,16.46-17.91Z" />
     <polygon points="18.41 251.2 18.41 274.92 25.73 274.92 25.73 281 35.82 281 35.82 245.18 25.73 245.18 25.73 251.2 18.41 251.2" />
@@ -288,7 +322,7 @@ const Hero = () => {
     <path d="m774.29,406.39c0-9.37-7.25-17.08-16.46-17.91v35.82c9.21-.84,16.46-8.54,16.46-17.91Z" />
     <polygon points="776.24 430.32 776.24 454.04 783.55 454.04 783.55 460.12 793.65 460.12 793.65 424.3 783.55 424.3 783.55 430.32 776.24 430.32" />
     <path d="m774.29,442.21c0-9.37-7.25-17.07-16.46-17.91v35.82c9.21-.84,16.46-8.54,16.46-17.91Z" />
-
+    </g>
       </svg>
       <div className='print' onClick={print}>Print</div>
     </div>
