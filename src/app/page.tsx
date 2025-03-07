@@ -5,17 +5,19 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import Hero from "../components/hero"
+import Layout from "@/components/layout"
 
 export default async function Home() {
   const client = createClient();
   const home = await client.getByUID("page", "home");
+  const navigation = await client.getByType('navigation');
 
   // <SliceZone> renders the page's slices.
   return (
     <div className="home">
-      <Hero/>
-      <SliceZone slices={home.data.slices} components={components} />
+      <Layout menu={navigation.results[0].data}>
+        <SliceZone slices={home.data.slices} components={components} />
+      </Layout>
     </div>
   )
 }

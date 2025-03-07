@@ -1,9 +1,38 @@
 body{
   padding: 0;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #6C2537;
 }
 
-.hero{
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu{
+  position: fixed;
+  width: 100%;
+  color: #C4CED5;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 36px;
+  padding: 14px;
+  text-transform: lowercase;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  background-color: #6C2537;
+  a:hover{
+    color: #FF5012;
+  }
+}
+
+.home .menu{
+  background-color: transparent
+}
+
+.logo-hero{
   height: 100svh;
   display: flex;
   justify-content: center;
@@ -13,6 +42,22 @@ body{
     width: 90%;
     max-width: 800px;
   }
+}
+
+.page .logo-hero {
+  height: 40svh;
+  width: 100%;
+  margin-top: 150px;
+  svg{
+    height: 40svh;
+    fill: #C4CED5;
+  }
+}
+
+.hero video{
+  height: 100svh;
+  width: 100vw;
+  object-fit: cover;
 }
 
 .print{
@@ -32,5 +77,28 @@ body{
 @media print{
   .print{
     display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .page .logo-hero {
+    height: 500px;
+    margin-top: 100px;
+    margin-bottom: -250px;
+    width: 100%;
+    svg{
+      height: 500px;
+      fill: #C4CED5;
+      width: 40vw;
+      g {
+        width: 40vw;
+      }
+      #group1{
+        transform: translate(-55%, 0); /* Adjust as needed to position the second group */
+      }
+      #group2{
+        transform: translate(55%, -60%); /* Adjust as needed to position the second group */
+      }
+    }
   }
 }

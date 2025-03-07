@@ -6,6 +6,8 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import Layout from "@/components/layout"
+import Logo from "@/components/logo"
 
 type Params = { uid: string };
 
@@ -13,9 +15,17 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
   const client = createClient();
   const page = await client.getByUID("page", uid).catch(() => notFound());
+  const navigation = await client.getByType('navigation');
 
   // <SliceZone> renders the page's slices.
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <div className="page">
+      <Layout menu={navigation.results[0].data}>
+        <Logo/>
+        <SliceZone slices={page.data.slices} components={components} />
+      </Layout>
+    </div>
+  )
 }
 
 export async function generateMetadata({
