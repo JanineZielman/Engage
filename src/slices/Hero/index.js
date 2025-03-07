@@ -10,7 +10,7 @@ const Hero = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="hero"
     >
-      <video loop muted autoPlay>
+      <video loop muted autoPlay playsInline>
         <source src={slice.primary.video?.url} type="video/mp4"/>
       </video>
     </section>
