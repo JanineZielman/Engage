@@ -178,6 +178,16 @@ export interface RichTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   full_width: prismic.BooleanField;
+
+  /**
+   * Side Column field in *RichText → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.side_column
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  side_column: prismic.RichTextField;
 }
 
 /**

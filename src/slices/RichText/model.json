@@ -31,6 +31,15 @@
             "placeholder_true": "true",
             "default_value": true
           }
+        },
+        "side_column": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Side Column",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
         }
       },
       "items": {},

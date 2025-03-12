@@ -29,7 +29,14 @@ type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 const RichText: FC<RichTextProps> = ({ slice }) => {
   return (
     <section className={`textWrapper ${slice.primary.full_width ? 'fullwidth' : 'small'}`}>
-      <PrismicRichText field={slice.primary.content} components={components} />
+      <div>
+        <PrismicRichText field={slice.primary.content} components={components} />
+      </div>
+      {slice.primary.side_column[0] &&
+        <div>
+          <PrismicRichText field={slice.primary.side_column} components={components} />
+        </div>
+      }
     </section>
   );
 };

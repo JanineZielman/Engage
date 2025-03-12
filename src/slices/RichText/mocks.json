@@ -17,6 +17,17 @@
 			"full_width": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"side_column": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sunt sunt ad reprehenderit fugiat ad ad labore id non id. Ea Lorem sint est sunt Lorem aliquip. Aute qui minim commodo aute mollit non labore et mollit occaecat ullamco."
+						}
+					}
+				]
 			}
 		},
 		"items": [

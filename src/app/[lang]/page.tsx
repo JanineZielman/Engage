@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import { reverseLocaleLookup } from "@/i18n";
 
 import { asText } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
@@ -7,10 +8,17 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import Layout from "@/components/layout"
 
-export default async function Home() {
+type Params = { lang: string };
+
+export default async function Home({ params }: { params: Promise<Params> }) {
+  const { lang } = await params;
   const client = createClient();
-  const home = await client.getByUID("page", "home");
-  const navigation = await client.getByType('navigation');
+  const home = await client.getByUID("page", "home", {
+      lang: reverseLocaleLookup(lang),
+    });
+  const navigation = await client.getByType('navigation', {
+      lang: reverseLocaleLookup(lang),
+    });
 
   // <SliceZone> renders the page's slices.
   return (
@@ -22,9 +30,12 @@ export default async function Home() {
   )
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { lang } = await params;
   const client = createClient();
-  const home = await client.getByUID("page", "home");
+  const home = await client.getByUID("page", "home", {
+    lang: reverseLocaleLookup(lang),
+  });
 
   return {
     title: asText(home.data.title),

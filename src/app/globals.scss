@@ -65,15 +65,15 @@ a{
 }
 
 .page .logo-hero {
-  height: 40svh;
-  width: 100%;
-  margin-top: 50px;
+  height: auto;
+  margin-top: 100px;
   svg{
-    height: 40svh;
+    max-width: 100%;
     fill: #C4CED5;
-  }
-  .print{
-    display: none;
+    polygon, path{
+      stroke-width: 2px;
+      stroke: #C4CED5;
+    }
   }
 }
 
@@ -100,10 +100,14 @@ a{
   font-size: 30px;
   font-weight: 300;
   line-height: 1.3;
+  display: flex;
+  justify-content: space-between;
+  div{
+    width: 100%;
+  }
   &.small{
     color: #C4CED5;
     font-size: 18px;
-    column-count: 2;
   }
 }
 
@@ -118,35 +122,13 @@ a{
 }
 
 
-@media only screen and (min-width: 600px) {
-  .page .logo-hero {
-    height: 50vw;
-    margin-top: 0;
-    margin-bottom: -25vw;
-    width: 100%;
-    svg{
-      height: 50vw;
-      fill: #C4CED5;
-      width: 45vw;
-      g {
-        width: 45vw;
-      }
-      #group1{
-        transform: translate(-55%, 0); /* Adjust as needed to position the second group */
-      }
-      #group2{
-        transform: translate(55%, -60%); /* Adjust as needed to position the second group */
-      }
-    }
-  }
-}
-
 @media only screen and (max-width: 600px) {
   .textWrapper{
     max-width: 100%;
     font-size: 30px;
     padding: 4vw;
     font-size: 24px;
+    flex-direction: column;
     &.small{
       font-size: 18px;
       column-count: 1;
@@ -154,5 +136,15 @@ a{
   }
   .menu{
     font-size: 18px;
+  }
+  .hero{
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .hero video{
+    width: 125vw;
+    margin-left: -12.5vw;
+    object-fit: fill;
   }
 }
