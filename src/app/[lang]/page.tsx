@@ -23,7 +23,7 @@ export default async function Home({ params }: { params: Promise<Params> }) {
   // <SliceZone> renders the page's slices.
   return (
     <div className="home">
-      <Layout menu={navigation.results[0].data}>
+      <Layout menu={navigation.results[0].data} lang={lang}>
         <SliceZone slices={home.data.slices} components={components} />
       </Layout>
     </div>

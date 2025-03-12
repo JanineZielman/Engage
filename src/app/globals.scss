@@ -17,6 +17,10 @@
   font-style: italic;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 body{
   padding: 0;
   margin: 0;
@@ -48,8 +52,21 @@ a{
   }
 }
 
+.active-language {
+  color: #FF5012;
+}
+
 .home .menu{
   background-color: transparent
+}
+
+.language-switcher {
+  font-size: 18px;
+  position: fixed;
+  right: 14px;
+  a{
+    font-size: 18px;
+  }
 }
 
 .logo-hero{
@@ -136,6 +153,12 @@ a{
   }
   .menu{
     font-size: 18px;
+    top: 0;
+    justify-content: space-between;
+    padding: 36px 14px 14px 14px;
+  }
+  .language-switcher{
+    top: 10px;
   }
   .hero{
     width: 100vw;

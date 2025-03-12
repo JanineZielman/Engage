@@ -7,8 +7,8 @@ import Negotiator from "negotiator";
  * used as the default locale.
  */
 const LOCALES = {
-  "en-us": "en",
-  "nl-nl": "nl",
+  "nl-nl": "nl-nl",
+  "en-us": "en-us",
 } as const;
 
 /** Creates a redirect with an auto-detected locale prepended to the URL. */
