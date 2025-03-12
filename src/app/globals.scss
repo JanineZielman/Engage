@@ -83,6 +83,11 @@ p a{
     overflow: visible;
     width: 90%;
     max-width: 800px;
+    fill: #C4CED5;
+    polygon, path{
+      stroke-width: 2px;
+      stroke: #C4CED5;
+    }
   }
 }
 

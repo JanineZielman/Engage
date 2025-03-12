@@ -1,4 +1,4 @@
-import LogoAni from "../../components/logo"
+import LogoAni from "../../../components/logo"
 
 export default async function Logo() {
   return (
