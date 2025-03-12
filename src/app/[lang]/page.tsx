@@ -20,6 +20,8 @@ export default async function Home({ params }: { params: Promise<Params> }) {
       lang: reverseLocaleLookup(lang),
     });
 
+    console.log(home.data.slices)
+
   // <SliceZone> renders the page's slices.
   return (
     <div className="home">
