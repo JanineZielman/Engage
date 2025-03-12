@@ -33,6 +33,10 @@ a{
   text-decoration: none;
 }
 
+p a{
+  text-decoration: underline;
+}
+
 .menu{
   position: fixed;
   width: 100%;
@@ -52,7 +56,7 @@ a{
   }
 }
 
-.active-language {
+.active-language, .active-menu-item {
   color: #FF5012;
 }
 
@@ -92,6 +96,11 @@ a{
       stroke: #C4CED5;
     }
   }
+}
+
+.home{
+  height: 100svh;
+  overflow: hidden;
 }
 
 .hero video{
@@ -155,19 +164,16 @@ a{
     font-size: 18px;
     top: 0;
     justify-content: space-between;
-    padding: 36px 14px 14px 14px;
+    padding: 14px 14px 40px 14px;
   }
   .language-switcher{
-    top: 10px;
-  }
-  .hero{
-    width: 100vw;
-    height: 100svh;
-    overflow: hidden;
+    top: 44px;
   }
   .hero video{
-    width: 125vw;
-    margin-left: -12.5vw;
-    object-fit: fill;
+    object-fit: cover;
+    height: 38svh;
+  }
+  .home{
+    height: auto;
   }
 }

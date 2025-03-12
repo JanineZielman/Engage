@@ -18,14 +18,25 @@ const Layout = ({ children, menu, lang }) => {
     return url; // Keep external links as is
   };
 
+  // Function to check if the menu item is the current page
+  const isActiveMenuItem = (url) => {
+    // Check if the pathname matches the menu item’s URL, accounting for language prefixes
+    const localizedUrl = getLocalizedUrl(url, lang);
+    return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/"); // Exact match or subpage
+  };
+
   return (
     <div className="container">
       <div className="menu">
-        {menu.link.map((item, i) => (
-          <Link key={`link${i}`} href={getLocalizedUrl(item.url, lang)}>
-            {item.text}
-          </Link>
-        ))}
+        {menu.link.map((item, i) => {
+           const menuItemIsActive = isActiveMenuItem(item.url); // Check if this menu item is active
+           const menuItemClass = menuItemIsActive ? "active-menu-item" : ""; // Add class if active
+          return(
+            <Link key={`link${i}`} href={getLocalizedUrl(item.url, lang)}  className={menuItemClass}>
+              {item.text}
+            </Link>
+          )
+        })}
         {/* Language Switcher */}
         <div className="language-switcher">
           {Object.entries(LOCALES).map(([locale, label], i) => {
