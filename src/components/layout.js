@@ -33,7 +33,7 @@ const Layout = ({ children, menu, lang }) => {
       <div className="menu">
         {Array.isArray(menu.link) &&
           menu.link.map((item, i) => {
-            if (!item || !item.url) return null; // Ensure item and item.url are defined
+            // if (!item || !item.url) return null; // Ensure item and item.url are defined
             const menuItemIsActive = isActiveMenuItem(item.url);
             const menuItemClass = menuItemIsActive ? "active-menu-item" : "";
             return (
