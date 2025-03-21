@@ -8,10 +8,11 @@ const LOCALES = {
 };
 
 const Layout = ({ children, menu, lang }) => {
-  const pathname = usePathname(); // Get the current pathname
+  const pathname = usePathname() || "/"; // Ensure pathname is always defined
 
   // Function to adjust menu item URLs with the correct language
   const getLocalizedUrl = (url, lang) => {
+    if (!url) return ""; // Prevent errors if url is undefined
     if (url.startsWith("/")) {
       return `/${lang}${url}`;
     }
@@ -20,7 +21,7 @@ const Layout = ({ children, menu, lang }) => {
 
   // Function to check if the menu item is the current page
   const isActiveMenuItem = (url) => {
-    // Check if the pathname matches the menu item’s URL, accounting for language prefixes
+    if (!url) return false; // Prevent errors if url is undefined
     const localizedUrl = getLocalizedUrl(url, lang);
     return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/"); // Exact match or subpage
   };
@@ -28,30 +29,36 @@ const Layout = ({ children, menu, lang }) => {
   return (
     <div className="container">
       <div className="menu">
-        {menu.link.map((item, i) => {
-           const menuItemIsActive = isActiveMenuItem(item.url); // Check if this menu item is active
-           const menuItemClass = menuItemIsActive ? "active-menu-item" : ""; // Add class if active
-          return(
-            <Link key={`link${i}`} href={getLocalizedUrl(item.url, lang)}  className={menuItemClass}>
-              {item.text}
-            </Link>
-          )
-        })}
+        {Array.isArray(menu.link) &&
+          menu.link.map((item, i) => {
+            if (!item || !item.url) return null; // Ensure item and item.url are defined
+            const menuItemIsActive = isActiveMenuItem(item.url);
+            const menuItemClass = menuItemIsActive ? "active-menu-item" : "";
+            return (
+              <Link
+                key={`link${i}`}
+                href={getLocalizedUrl(item.url, lang)}
+                className={menuItemClass}
+              >
+                {item.text}
+              </Link>
+            );
+          })}
+        
         {/* Language Switcher */}
         <div className="language-switcher">
           {Object.entries(LOCALES).map(([locale, label], i) => {
-            // Check if the current locale is the active language
             const isActive = lang === locale;
-            
-            // Apply an active class if it's the current language
             const className = isActive ? "active-language" : "";
 
-            const newPathname = pathname.replace(`/${lang}`, `/${locale}`);
+            const newPathname = pathname ? pathname.replace(`/${lang}`, `/${locale}`) : "/";
+            
             return (
               <span key={locale}>
                 <Link className={className} href={newPathname}>
                   {label}
-                </Link> {i == 0 &&<span>/ </span>}
+                </Link>{" "}
+                {i === 0 && <span>/ </span>}
               </span>
             );
           })}
