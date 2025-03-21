@@ -14,10 +14,10 @@ export default async function Home({ params }: { params: Promise<Params> }) {
   const { lang } = await params;
   const client = createClient();
   const home = await client.getByUID("page", "home", {
-    lang: "*",
+      lang: reverseLocaleLookup(lang),
     });
   const navigation = await client.getByType('navigation', {
-    lang: "*",
+      lang: reverseLocaleLookup(lang),
     });
 
   // <SliceZone> renders the page's slices.
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { lang } = await params;
   const client = createClient();
   const home = await client.getByUID("page", "home", {
-    lang: "*",
+    lang: reverseLocaleLookup(lang),
   });
 
   return {
