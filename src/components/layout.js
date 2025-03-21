@@ -26,6 +26,8 @@ const Layout = ({ children, menu, lang }) => {
     return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/"); // Exact match or subpage
   };
 
+  console.log(menu)
+
   return (
     <div className="container">
       <div className="menu">
