@@ -12,7 +12,7 @@ const Layout = ({ children, menu, lang }) => {
 
   // Function to adjust menu item URLs with the correct language
   const getLocalizedUrl = (url, lang) => {
-    if (!url) return ""; // Prevent errors if url is undefined
+    if (!url) return `/${lang}/connect`; // Prevent errors if url is undefined
     if (url.startsWith("/")) {
       return `/${lang}${url}`;
     }
