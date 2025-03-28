@@ -74,6 +74,26 @@ p a{
   }
 }
 
+.opencall-ani{
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  background-color: rgb(62, 36, 2);
+  position: absolute;
+  .logo-hero{
+    height: 80svh;
+    margin-top: 10svh;
+    svg{
+      height: 100%;
+      fill: rgb(218, 231, 54);
+      polygon, path{
+        stroke-width: 2px;
+        stroke: rgb(218, 231, 54);
+      }
+    }
+  }
+}
+
 .logo-hero{
   height: 100svh;
   display: flex;
