@@ -9,6 +9,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script defer data-domain="engagebiennial.nl" src="https://plausible.io/js/script.js"></script>
+      </head>
       <body>{children}</body>
       <PrismicPreview repositoryName={repositoryName} />
     </html>
