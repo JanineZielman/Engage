@@ -78,17 +78,17 @@ p a{
   height: 100vh;
   width: 100vw;
   top: 0;
-  background-color: rgb(62, 36, 2);
+  // background-color: rgb(62, 36, 2);
   position: absolute;
   .logo-hero{
     height: 80svh;
     margin-top: 10svh;
     svg{
       height: 100%;
-      fill: rgb(218, 231, 54);
+      fill:  #6C2537;
       polygon, path{
         stroke-width: 2px;
-        stroke: rgb(218, 231, 54);
+        stroke: #6C2537;
       }
     }
   }
@@ -181,6 +181,27 @@ section{
   }
 }
 
+.buttons{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2vw;
+  padding-bottom: 48px;
+  a{
+    margin-bottom: 24px;
+    padding: 10px 24px;
+    background-color: #FF5012;
+    color: #6C2537;
+    font-size: 24px;
+    margin-right: 24px;
+    font-weight: 500;
+    font-size: 30px;
+  }
+}
+
+.bg-vid{
+  position: fixed;
+  z-index: -1;
+}
 
 @media only screen and (max-width: 600px) {
   .textWrapper{
@@ -192,6 +213,11 @@ section{
     &.small{
       font-size: 18px;
       column-count: 1;
+    }
+  }
+  .buttons{
+    a{
+      font-size: 24px;
     }
   }
   .menu{

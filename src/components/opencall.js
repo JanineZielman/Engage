@@ -4,62 +4,77 @@ import { useEffect } from 'react';
 
 const Logo = () => {
   const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%'; // Random between -2% and 2%, scaled
-const getRandomOffset2 = (factor = 1) => (Math.random() * 4 - 2) * factor + '%'; // Random between -1% and 1%, scaled
-const getRandomOffset3 = (factor = 1) => (Math.random() * 1 - 1) * factor + '%'; // Random between -1% and 1%, scaled
+  const getRandomOffset2 = (factor = 1) => (Math.random() * 2 - 1) * factor + '%'; // Random between -1% and 1%, scaled
+  const getRandomOffset3 = (factor = 1) => (Math.random() * 2 - 1) * factor + '%'; // Random between -1% and 1%, scaled
 
-useEffect(() => {
-  const group1 = document.querySelector('#group1');
-  const polygons1 = document.querySelectorAll('#group1 polygon');
-  const path1 = document.querySelectorAll('#group1 path');
-  const group2 = document.querySelector('#group2');
-  const polygons2 = document.querySelectorAll('#group2 polygon');
-  const path2 = document.querySelectorAll('#group2 path');
+  useEffect(() => {
+    const group1 = document.querySelector('#group1');
+    const polygons1 = document.querySelectorAll('#group1 polygon');
+    const path1 = document.querySelectorAll('#group1 path');
+    const group2 = document.querySelector('#group2');
+    const polygons2 = document.querySelectorAll('#group2 polygon');
+    const path2 = document.querySelectorAll('#group2 path');
 
-  let timeElapsed = 0;
-  const cycleDuration = 5000; // 5 seconds
-  const updateInterval = 100; // Every 100ms
+    let timeElapsed = 0;
+    const cycleDuration = 5000; // 5 seconds
+    const updateInterval = 100; // Every 100ms
 
-  const updatePositions = () => {
-    // Normalize time into a 0 → π cycle for a sine wave transition
-    const progress = (timeElapsed / cycleDuration) * Math.PI;
-    const factor = Math.sin(progress); // Smooth in-out transition
+    const updatePositions = () => {
+      const progress = (timeElapsed / cycleDuration) * (Math.PI / 2); // From π/2 to 0
+      const sineFactor = Math.pow(Math.sin(Math.PI / 2 - progress), 2); // steeper fade
+      const decayFactor = 10 - timeElapsed / cycleDuration; // from 1 to 0
+      // const combinedFactor = sineFactor * (5.5 * decayFactor + 0.5);
 
-    if (group1) {
-      polygons1.forEach(polygon => {
-        polygon.style.transform = `translateX(${getRandomOffset(factor)})`;
-      });
-      path1.forEach(path => {
-        path.style.transform = `translateY(${getRandomOffset3(factor)})`;
-      });
-    }
+      const cycleProgress = timeElapsed % cycleDuration;
+      const normalized = cycleProgress / cycleDuration;
 
-    if (group2) {
-      polygons2.forEach(polygon => {
-        polygon.style.transform = `translateY(${getRandomOffset(factor)})`;
-      });
-      path2.forEach(path => {
-        path.style.transform = `translateY(${getRandomOffset2(factor)})`;
-      });
-    }
+      let combinedFactor;
 
-    // Update time
-    timeElapsed += updateInterval;
-    if (timeElapsed >= cycleDuration) {
-      timeElapsed = 0; // Reset after 5 seconds
-    }
-  };
+      if (normalized < 0.2) {
+        // First 40%: decay from high to low
+        const decayProgress = normalized / 0.4; // 0 → 1
+        const decay = 1 - Math.pow(5, -10 * decayProgress); // starts strong, eases out
+        combinedFactor = decay * 20.5 + 5; // from 6 to 0.5
+      } else {
+        // Remaining 60%: chill state
+        // combinedFactor = 1; // hold the calm
+        combinedFactor = sineFactor * (0.5 * decayFactor + 0.5);
+      }
+      
 
-  updatePositions(); // Set initial positions
+      if (group1) {
+        polygons1.forEach(polygon => {
+          polygon.style.transform = `translateX(${getRandomOffset(combinedFactor)})`;
+        });
+        path1.forEach(path => {
+          path.style.transform = `translateY(${getRandomOffset3(combinedFactor)})`;
+        });
+      }
 
-  const interval = setInterval(updatePositions, updateInterval); // Update every 100ms
+      if (group2) {
+        polygons2.forEach(polygon => {
+          polygon.style.transform = `translateY(${getRandomOffset(combinedFactor)})`;
+        });
+        path2.forEach(path => {
+          path.style.transform = `translateY(${getRandomOffset2(combinedFactor)})`;
+        });
+      }
 
-  return () => clearInterval(interval); // Cleanup on unmount
-}, []);
+      // Update time
+      timeElapsed += updateInterval;
+      if (timeElapsed >= cycleDuration) {
+        timeElapsed = 0; // Reset after each full cycle
+      }
+    };
 
+    updatePositions(); // Set initial positions
 
-  
+    const interval = setInterval(updatePositions, updateInterval); // Update every 100ms
 
-  function print(){
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  function print() {
     window.print();
   }
   
@@ -275,6 +290,11 @@ useEffect(() => {
     </g>
 </svg>
       <div className='print' onClick={print}>Print</div>
+      <div className='bg-vid'>
+        <video loop muted autoPlay playsInline>
+          <source src={'/bg.mp4'} type="video/mp4"/>
+        </video>
+      </div>
     </div>
 
   );

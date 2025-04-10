@@ -38,7 +38,7 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = HeroSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice = ButtonsSlice | HeroSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -111,6 +111,53 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 export type AllDocumentTypes = NavigationDocument | PageDocument;
+
+/**
+ * Primary content in *Buttons → Default → Primary*
+ */
+export interface ButtonsSliceDefaultPrimary {
+  /**
+   * Button field in *Buttons → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: buttons.default.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * Default variation for Buttons Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ButtonsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ButtonsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Buttons*
+ */
+type ButtonsSliceVariation = ButtonsSliceDefault;
+
+/**
+ * Buttons Shared Slice
+ *
+ * - **API ID**: `buttons`
+ * - **Description**: Buttons
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ButtonsSlice = prismic.SharedSlice<
+  "buttons",
+  ButtonsSliceVariation
+>;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -247,6 +294,10 @@ declare module "@prismicio/client" {
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      ButtonsSlice,
+      ButtonsSliceDefaultPrimary,
+      ButtonsSliceVariation,
+      ButtonsSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
