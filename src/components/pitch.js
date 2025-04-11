@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 const Logo = () => {
   useEffect(() => {
     const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%';
-    const getRandomOffset2 = (factor = 1) => (Math.random() * 2 - 1) * factor + '%';
-    const getRandomOffset3 = (factor = 1) => (Math.random() * 2 - 1) * factor + '%';
   
     const groups = [];
   
@@ -81,9 +79,9 @@ const Logo = () => {
   }, []);
   
 
-  function print() {
-    window.print();
-  }
+  // function print() {
+  //   window.print();
+  // }
   
 
   return (

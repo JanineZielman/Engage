@@ -74,9 +74,9 @@ const Logo = () => {
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
-  function print() {
-    window.print();
-  }
+  // function print() {
+  //   window.print();
+  // }
   
 
   return (
