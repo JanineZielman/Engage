@@ -78,7 +78,6 @@ p a{
   height: 100vh;
   width: 100vw;
   top: 0;
-  // background-color: rgb(62, 36, 2);
   position: absolute;
   .logo-hero{
     height: 80svh;
@@ -89,6 +88,25 @@ p a{
       polygon, path{
         stroke-width: 2px;
         stroke: #6C2537;
+      }
+    }
+  }
+}
+
+.pitch-ani{
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  position: absolute;
+  .logo-hero{
+    height: 80svh;
+    margin-top: 10svh;
+    svg{
+      height: 100%;
+      fill:  #FF5012;
+      polygon, path{
+        stroke-width: 2px;
+        stroke: #FF5012;
       }
     }
   }
@@ -192,7 +210,7 @@ section{
     background-color: #FF5012;
     color: #6C2537;
     font-size: 24px;
-    margin-right: 24px;
+    margin-right: 48px;
     font-weight: 500;
     font-size: 30px;
   }
@@ -201,6 +219,16 @@ section{
 .bg-vid{
   position: fixed;
   z-index: -1;
+  object-fit: cover;
+  video{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+}
+
+svg *{
+  // transition: all 0.4s ease;
 }
 
 @media only screen and (max-width: 600px) {

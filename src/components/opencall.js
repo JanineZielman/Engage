@@ -289,7 +289,7 @@ const Logo = () => {
       </g>
     </g>
 </svg>
-      <div className='print' onClick={print}>Print</div>
+      {/* <div className='print' onClick={print}>Print</div> */}
       <div className='bg-vid'>
         <video loop muted autoPlay playsInline>
           <source src={'/bg.mp4'} type="video/mp4"/>
