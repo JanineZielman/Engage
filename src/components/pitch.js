@@ -1,8 +1,12 @@
 'use client'
 // Import required dependencies
 import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation'
 
 const Logo = () => {
+  const searchParams = useSearchParams()
+  const search = searchParams.get('v')
+  console.log(search)
   useEffect(() => {
     const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%';
   
@@ -79,13 +83,8 @@ const Logo = () => {
   }, []);
   
 
-  // function print() {
-  //   window.print();
-  // }
-  
-
   return (
-    <div className="logo-hero">
+    <div className="logo-hero" id={search}>
       <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 687.77 624.23">
           <g id="Laag_1">
             <polygon points="31.77 452.87 6.49 452.87 6.49 460.67 0 460.67 0 471.44 38.2 471.44 38.2 460.67 31.77 460.67 31.77 452.87" />
@@ -292,10 +291,13 @@ const Logo = () => {
             <path d="m302.79,252.85c0-10.02-7.76-18.26-17.6-19.15v38.3c9.84-.89,17.6-9.13,17.6-19.15Z" />
           </g>
       </svg>
-      {/* <div className='print' onClick={print}>Print</div> */}
       <div className='bg-vid'>
         <video loop muted autoPlay playsInline>
+          {search == 'version1'  || search == 'version4' ?
+          <source src={'/bg.mp4'} type="video/mp4"/>
+          :
           <source src={'/bg-r.mp4'} type="video/mp4"/>
+          }
         </video>
       </div>
     </div>
