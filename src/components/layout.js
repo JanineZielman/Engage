@@ -44,7 +44,10 @@ const Layout = ({ children, menu, lang }) => {
                 href={getLocalizedUrl(item.url, lang)}
                 className={menuItemClass}
               >
-                {item.text}
+                {item.text == 'Partners' ?
+                  `${lang == 'nl-nl' ? 'agenda' : 'events'}`
+                  :
+                item.text}
               </Link>
             );
           })}
@@ -57,10 +60,7 @@ const Layout = ({ children, menu, lang }) => {
             return (
               <span key={locale}>
                 <Link className={className} href={newPathname}>
-                  {label == 'Partners' ?
-                  `${lang == 'nl-nl' ? 'agenda' : 'events'}`
-                  :
-                  label}
+                  {label}
                 </Link>{" "}
                 {i === 0 && <span>/ </span>}
               </span>
