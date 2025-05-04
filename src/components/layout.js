@@ -57,7 +57,7 @@ const Layout = ({ children, menu, lang }) => {
             return (
               <span key={locale}>
                 <Link className={className} href={newPathname}>
-                  {label == 'partners' ?
+                  {label == 'Partners' ?
                   `${lang == 'nl-nl' ? 'agenda' : 'events'}`
                   :
                   label}
