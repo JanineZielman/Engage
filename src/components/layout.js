@@ -1,6 +1,6 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import usePathname
 
 const LOCALES = {
   'nl-nl': "nl",
@@ -8,32 +8,33 @@ const LOCALES = {
 };
 
 const Layout = ({ children, menu, lang }) => {
-  const pathname = usePathname() || "/"; // Ensure pathname is always defined
+  const [pathname, setPathname] = useState("/");
 
-  // Function to adjust menu item URLs with the correct language
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname);
+    }
+  }, []);
+
   const getLocalizedUrl = (url, lang) => {
-    if (!url) return `/${lang}/connect`; // Prevent errors if url is undefined
+    if (!url) return `/${lang}/connect`;
     if (url.startsWith("/")) {
       return `/${lang}${url}`;
     }
-    return url; // Keep external links as is
+    return url;
   };
 
-  // Function to check if the menu item is the current page
   const isActiveMenuItem = (url) => {
-    if (!url) return false; // Prevent errors if url is undefined
+    if (!url) return false;
     const localizedUrl = getLocalizedUrl(url, lang);
-    return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/"); // Exact match or subpage
+    return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/");
   };
-
-  console.log(menu)
 
   return (
     <div className="container">
       <div className="menu">
         {Array.isArray(menu.link) &&
           menu.link.map((item, i) => {
-            // if (!item || !item.url) return null; // Ensure item and item.url are defined
             const menuItemIsActive = isActiveMenuItem(item.url);
             const menuItemClass = menuItemIsActive ? "active-menu-item" : "";
             return (
@@ -46,15 +47,12 @@ const Layout = ({ children, menu, lang }) => {
               </Link>
             );
           })}
-        
-        {/* Language Switcher */}
+
         <div className="language-switcher">
           {Object.entries(LOCALES).map(([locale, label], i) => {
             const isActive = lang === locale;
             const className = isActive ? "active-language" : "";
-
-            const newPathname = pathname ? pathname.replace(`/${lang}`, `/${locale}`) : "/";
-            
+            const newPathname = pathname.replace(`/${lang}`, `/${locale}`);
             return (
               <span key={locale}>
                 <Link className={className} href={newPathname}>
