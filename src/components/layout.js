@@ -17,6 +17,7 @@ const Layout = ({ children, menu, lang }) => {
   }, []);
 
   const getLocalizedUrl = (url, lang) => {
+    if (url == '/partners') return `/${lang}/agenda`;
     if (!url) return `/${lang}/connect`;
     if (url.startsWith("/")) {
       return `/${lang}${url}`;
