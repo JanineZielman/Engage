@@ -57,7 +57,10 @@ const Layout = ({ children, menu, lang }) => {
             return (
               <span key={locale}>
                 <Link className={className} href={newPathname}>
-                  {label}
+                  {label == 'partners' ?
+                  `${lang == 'nl-nl' ? 'agenda' : 'events'}`
+                  :
+                  label}
                 </Link>{" "}
                 {i === 0 && <span>/ </span>}
               </span>
