@@ -93,6 +93,52 @@ p a{
   }
 }
 
+.ani-gen{
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  position: absolute;
+  .logo-hero{
+    height: 80svh;
+    margin-top: 10svh;
+    .uploaded-svg{
+      height: 70svh;
+    }
+    svg{
+      height: 100%;
+      fill: inherit;
+      polygon, path{
+        stroke-width: 2px;
+        stroke: inherit;
+      }
+    }
+  }
+  .controls{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 164px;
+    background-color: #C4CED5;
+    padding: 14px;
+    label, .mt-3{
+      display: flex;
+      flex-direction: column;
+      margin: 5px 0;
+    }
+    span{
+      font-size: 14px;
+      padding-bottom: 5px;
+    }
+  }
+  .show-hide{
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+  }
+}
+
 .pitch-ani{
   height: 100vh;
   width: 100vw;
