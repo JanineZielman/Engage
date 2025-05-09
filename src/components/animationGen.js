@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 
 const Logo = () => {
   const [fillColor, setFillColor] = useState('#000000');
+  const [bgColor, setBgColor] = useState('#000000');
   const [uploadedSVG, setUploadedSVG] = useState('');
   const [videoChoice, setVideoChoice] = useState('yellow'); // 'yellow' or 'red'
   const [cycleDuration, setCycleDuration] = useState(5000);
@@ -78,7 +79,8 @@ const Logo = () => {
         elements.forEach((el) => el.setAttribute('fill', fillColor));
       }
     }
-  }, [fillColor, uploadedSVG, maxLayers]);
+    document.body.style.backgroundColor = bgColor;
+  }, [fillColor, uploadedSVG, maxLayers, bgColor]);
 
   return (
     <div className="logo-hero relative min-h-screen bg-gray-100">
@@ -106,6 +108,17 @@ const Logo = () => {
             />
           </label>
 
+          <label className="block mb-2">
+            <span className="font-semibold">Bg Color:</span>
+            <input
+              type="text"
+              value={bgColor}
+              onChange={(e) => setBgColor(e.target.value)}
+              className="ml-2 p-1 border rounded w-32"
+              placeholder="#ff0000"
+            />
+          </label>
+
           <div className="mt-3">
             <span className="font-semibold">Background Video:</span>
             <button
@@ -119,6 +132,12 @@ const Logo = () => {
               className={`ml-2 px-2 py-1 rounded ${videoChoice === 'red' ? 'bg-red-600 text-white' : 'bg-red-200'}`}
             >
               Red
+            </button>
+            <button
+              onClick={() => setVideoChoice('none')}
+              className={`ml-2 px-2 py-1 rounded ${videoChoice === 'none' ? 'bg-red-600 text-white' : 'bg-red-200'}`}
+            >
+              None
             </button>
           </div>
 
@@ -192,21 +211,23 @@ const Logo = () => {
       </div>
 
       {/* Background Video */}
-      <div className="bg-vid absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-        <video
-          key={videoChoice}
-          loop
-          muted
-          autoPlay
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source
-            src={videoChoice === 'red' ? '/bg-r.mp4' : '/bg.mp4'}
-            type="video/mp4"
-          />
-        </video>
-      </div>
+      {videoChoice != 'none' &&
+        <div className="bg-vid absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
+          <video
+            key={videoChoice}
+            loop
+            muted
+            autoPlay
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source
+              src={videoChoice === 'red' ? '/bg-r.mp4' : '/bg.mp4'}
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      }
       <button
           onClick={() => setShowControls((prev) => !prev)}
           className="show-hide"
