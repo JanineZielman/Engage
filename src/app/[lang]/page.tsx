@@ -13,14 +13,13 @@ type Params = { lang: string };
 export default async function Home({ params }: { params: Promise<Params> }) {
   const { lang } = await params;
   const client = createClient();
-  const home = await client.getByUID("page", "home", {
+  const home = await client.getSingle("homepage", {
       lang: reverseLocaleLookup(lang),
     });
   const navigation = await client.getByType('navigation', {
       lang: reverseLocaleLookup(lang),
     });
 
-  // <SliceZone> renders the page's slices.
   return (
     <div className="home">
       <Layout menu={navigation.results[0].data} lang={lang}>
@@ -33,7 +32,7 @@ export default async function Home({ params }: { params: Promise<Params> }) {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { lang } = await params;
   const client = createClient();
-  const home = await client.getByUID("page", "home", {
+  const home = await client.getSingle("homepage", {
     lang: reverseLocaleLookup(lang),
   });
 
