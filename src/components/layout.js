@@ -18,7 +18,7 @@ const Layout = ({ children, menu, lang }) => {
 
   const getLocalizedUrl = (url, lang) => {
     if (url == '/partners') return `/${lang}/agenda`;
-    if (!url) return `/${lang}/connect`;
+    if (!url) return `/${lang}`;
     if (url.startsWith("/")) {
       return `/${lang}${url}`;
     }
@@ -30,6 +30,8 @@ const Layout = ({ children, menu, lang }) => {
     const localizedUrl = getLocalizedUrl(url, lang);
     return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/");
   };
+
+  console.log('menu', menu)
 
   return (
     <div className="container">
