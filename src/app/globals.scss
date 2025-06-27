@@ -39,18 +39,19 @@ p a{
 
 .menu{
   position: fixed;
-  width: 100%;
+  width: 85%;
+  max-width: 1100px;
   color: #C4CED5;
   display: flex;
-  justify-content: space-evenly;
   font-size: 36px;
   padding: 14px 0;
   text-transform: lowercase;
   z-index: 9;
   top: 0;
-  left: 0;
+  left: 2vw;
   background-color: #6C2537;
   font-weight: 300;
+  justify-content: space-between;
   a:hover{
     color: #FF5012;
   }
@@ -185,7 +186,7 @@ p a{
 .logo-hero{
   height: 100svh;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   svg{
     overflow: visible;
@@ -203,13 +204,10 @@ p a{
   margin-left: 0;
 }
 
-section{
-  margin-left: 2.5vw;
-}
-
 .page .logo-hero {
   height: auto;
   margin-top: 100px;
+  max-width: 900px;
   svg{
     max-width: 100%;
     fill: #C4CED5;
