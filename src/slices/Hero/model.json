@@ -20,6 +20,15 @@
             "select": "media",
             "allowText": false
           }
+        },
+        "hide_video": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide Video",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}

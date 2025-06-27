@@ -251,6 +251,17 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   video: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Hide Video field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: hero.default.primary.hide_video
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  hide_video: prismic.BooleanField;
 }
 
 /**
