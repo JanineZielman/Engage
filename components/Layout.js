@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 const LOCALES = {
   'nl-nl': "nl",
@@ -8,7 +9,8 @@ const LOCALES = {
 
 export const Layout = ({
   menu,
-  children
+  children,
+  page
 }) => {
     const [pathname, setPathname] = useState("/");
   
@@ -16,9 +18,19 @@ export const Layout = ({
       setPathname(window.location.pathname);
     });
 
-    console.log(menu)
 
   return (
+    <>
+    <Head>
+        <title>
+          {`${page.data.meta_title}`}
+        </title>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${page.data.meta_title}`} />
+        <meta property="og:image" content={page.data.meta_image.url} />
+      <meta name="description" content={page.data.meta_description} />
+      <meta property="og:description" content={page.data.meta_description} />
+    </Head>
     <div className="container">
       <div className="menu">
         {Array.isArray(menu.link) &&
@@ -52,5 +64,6 @@ export const Layout = ({
       </div>
       {children}
     </div>
+    </>
   );
 };

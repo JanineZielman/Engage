@@ -8,7 +8,7 @@ import { Layout } from "../components/Layout";
 const Index = ({ home, navigation}) => {
 
   return (
-    <Layout menu={navigation.results[0].data}>
+    <Layout menu={navigation.results[0].data} page={home}>
       <SliceZone slices={home.data.slices} components={components} />
     </Layout>
   );

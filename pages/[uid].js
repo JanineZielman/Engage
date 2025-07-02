@@ -8,7 +8,7 @@ import Logo2 from "../components/logo2";
 const Page = ({ page, navigation }) => {
   return (
     <div className="page">
-      <Layout menu={navigation.results[0].data}>
+      <Layout menu={navigation.results[0].data} page={page}>
         <Logo2 />
         <SliceZone slices={page.data.slices} components={components} />
       </Layout>
