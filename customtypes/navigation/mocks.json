@@ -1,0 +1,19 @@
+[
+  {
+    "link": {
+      "__TYPE__": "RepeatableContent",
+      "type": "Link",
+      "value": [
+        {
+          "__TYPE__": "LinkContent",
+          "key": "ec940399-bf7b-4c6f-9909-eb057af495b7",
+          "value": {
+            "__TYPE__": "ExternalLink",
+            "url": "https://slicemachine.dev",
+            "text": "quite"
+          }
+        }
+      ]
+    }
+  }
+]
