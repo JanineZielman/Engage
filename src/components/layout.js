@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -11,9 +12,7 @@ const Layout = ({ children, menu, lang }) => {
   const [pathname, setPathname] = useState("/");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPathname(window.location.pathname);
-    }
+    setPathname(window.location.pathname);
   }, []);
 
   const getLocalizedUrl = (url, lang) => {
@@ -31,25 +30,21 @@ const Layout = ({ children, menu, lang }) => {
     return pathname === localizedUrl || pathname.startsWith(localizedUrl + "/");
   };
 
-  console.log('menu', menu)
-
   return (
     <div className="container">
       <div className="menu">
         {Array.isArray(menu.link) &&
           menu.link.map((item, i) => {
-            const menuItemIsActive = isActiveMenuItem(item.url);
-            const menuItemClass = menuItemIsActive ? "active-menu-item" : "";
+            const isActive = isActiveMenuItem(item.url);
             return (
               <Link
                 key={`link${i}`}
                 href={getLocalizedUrl(item.url, lang)}
-                className={menuItemClass}
+                className={isActive ? "active-menu-item" : ""}
               >
-                {item.text == 'Partners' ?
-                  `${lang == 'nl-nl' ? 'agenda' : 'events'}`
-                  :
-                item.text}
+                {item.text === "Partners"
+                  ? lang === "nl-nl" ? "agenda" : "events"
+                  : item.text}
               </Link>
             );
           })}
@@ -57,11 +52,10 @@ const Layout = ({ children, menu, lang }) => {
         <div className="language-switcher">
           {Object.entries(LOCALES).map(([locale, label], i) => {
             const isActive = lang === locale;
-            const className = isActive ? "active-language" : "";
             const newPathname = pathname.replace(`/${lang}`, `/${locale}`);
             return (
               <span key={locale}>
-                <Link className={className} href={newPathname}>
+                <Link className={isActive ? "active-language" : ""} href={newPathname}>
                   {label}
                 </Link>{" "}
                 {i === 0 && <span>/ </span>}
