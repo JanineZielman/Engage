@@ -16,13 +16,14 @@ const Layout = ({ children, menu, lang }) => {
   }, []);
 
   const getLocalizedUrl = (url, lang) => {
-    if (url == '/partners') return `/${lang}/agenda`;
     if (!url) return `/${lang}`;
     if (url.startsWith("/")) {
       return `/${lang}${url}`;
     }
     return url;
   };
+
+  console.log('menu', menu)
 
   const isActiveMenuItem = (url) => {
     if (!url) return false;
@@ -42,9 +43,7 @@ const Layout = ({ children, menu, lang }) => {
                 href={getLocalizedUrl(item.url, lang)}
                 className={isActive ? "active-menu-item" : ""}
               >
-                {item.text === "Partners"
-                  ? lang === "nl-nl" ? "agenda" : "events"
-                  : item.text}
+                {item.text}
               </Link>
             );
           })}
