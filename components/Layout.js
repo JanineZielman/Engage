@@ -39,7 +39,7 @@ export const Layout = ({
             return (
               <Link
                 key={`link${i}`}
-                href={`/${item.lang}/${item.slug == 'homepage' ? '/' : item.uid}`}
+                href={`/${item.lang}/${item.slug == 'homepage' ? '' : item.uid}`}
                 className={isActive ? "active-menu-item" : ""}
               >
                 {item.text}
@@ -50,12 +50,12 @@ export const Layout = ({
         <div className="language-switcher">
           {Object.entries(LOCALES).map(([locale, label], i) => {
             const isActive = menu.link[0].lang === locale;
-            const newPathname = pathname.replace(`/${menu.link[0].lang}`, `/${locale}`);
+            const newPathname = pathname.replace(`${menu.link[0].lang}`, `${locale}`);
             return (
               <span key={locale}>
-                <Link className={isActive ? "active-language" : ""} href={newPathname}>
+                <a className={isActive ? "active-language" : ""} href={newPathname == '/' ? `/${locale}` : `${newPathname}`}>
                   {label}
-                </Link>{" "}
+                </a>{" "}
                 {i === 0 && <span>/ </span>}
               </span>
             );
