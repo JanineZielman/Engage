@@ -20,6 +20,7 @@ const Hero = ({ slice }) => {
       <video loop muted autoPlay playsInline>
         <source src={slice.primary.video?.url} type="video/mp4"/>
       </video>
+      <Logo2/>
     </section>
     }
     </>
