@@ -165,11 +165,7 @@ p a{
 }
 
 .drawer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
-
   button {
     font-size: 30px;
     line-height: 1;
@@ -179,6 +175,9 @@ p a{
     border: none;
     color: #C4CED5;
     cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 }
 
