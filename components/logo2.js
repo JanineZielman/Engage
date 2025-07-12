@@ -1,64 +1,63 @@
 'use client'
 // Import required dependencies
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Logo2 = () => {
-  const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%'; // Random between -2% and 2%, scaled
-const getRandomOffset2 = (factor = 1) => (Math.random() * 4 - 2) * factor + '%'; // Random between -1% and 1%, scaled
-const getRandomOffset3 = (factor = 1) => (Math.random() * 1 - 1) * factor + '%'; // Random between -1% and 1%, scaled
+  const [isHovered, setIsHovered] = useState(false);
 
-useEffect(() => {
-  const group1 = document.querySelector('#group1');
-  const polygons1 = document.querySelectorAll('#group1 polygon');
-  const path1 = document.querySelectorAll('#group1 path');
-  const group2 = document.querySelector('#group2');
-  const polygons2 = document.querySelectorAll('#group2 polygon');
-  const path2 = document.querySelectorAll('#group2 path');
+  const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%';
+  const getRandomOffset2 = (factor = 1) => (Math.random() * 4 - 2) * factor + '%';
+  const getRandomOffset3 = (factor = 1) => (Math.random() * 1 - 1) * factor + '%';
 
-  let timeElapsed = 0;
-  const cycleDuration = 5000; // 5 seconds
-  const updateInterval = 100; // Every 100ms
+  useEffect(() => {
+    const group1 = document.querySelector('#group1');
+    const polygons1 = document.querySelectorAll('#group1 polygon');
+    const path1 = document.querySelectorAll('#group1 path');
+    const group2 = document.querySelector('#group2');
+    const polygons2 = document.querySelectorAll('#group2 polygon');
+    const path2 = document.querySelectorAll('#group2 path');
 
-  const updatePositions = () => {
-    // Normalize time into a 0 → π cycle for a sine wave transition
-    const progress = (timeElapsed / cycleDuration) * Math.PI;
-    const factor = Math.sin(progress); // Smooth in-out transition
+    let timeElapsed = 0;
+    const cycleDuration = 5000;
+    const updateInterval = 100;
 
-    if (group1) {
-      polygons1.forEach(polygon => {
-        polygon.style.transform = `translateX(${getRandomOffset(factor)})`;
-      });
-      path1.forEach(path => {
-        path.style.transform = `translateY(${getRandomOffset3(factor)})`;
-      });
-    }
+    const updatePositions = () => {
+      const progress = (timeElapsed / cycleDuration) * Math.PI;
+      let baseFactor = Math.sin(progress);
+      const factor = isHovered ? baseFactor * 25 : baseFactor; // 👈 Boost on hover
 
-    if (group2) {
-      polygons2.forEach(polygon => {
-        polygon.style.transform = `translateY(${getRandomOffset(factor)})`;
-      });
-      path2.forEach(path => {
-        path.style.transform = `translateY(${getRandomOffset2(factor)})`;
-      });
-    }
+      if (group1) {
+        polygons1.forEach(polygon => {
+          polygon.style.transform = `translateX(${getRandomOffset(factor)})`;
+        });
+        path1.forEach(path => {
+          path.style.transform = `translateY(${getRandomOffset3(factor)})`;
+        });
+      }
 
-    // Update time
-    timeElapsed += updateInterval;
-    if (timeElapsed >= cycleDuration) {
-      timeElapsed = 0; // Reset after 5 seconds
-    }
-  };
+      if (group2) {
+        polygons2.forEach(polygon => {
+          polygon.style.transform = `translateY(${getRandomOffset(factor)})`;
+        });
+        path2.forEach(path => {
+          path.style.transform = `translateY(${getRandomOffset2(factor)})`;
+        });
+      }
 
-  updatePositions(); // Set initial positions
+      timeElapsed += updateInterval;
+      if (timeElapsed >= cycleDuration) {
+        timeElapsed = 0;
+      }
+    };
 
-  const interval = setInterval(updatePositions, updateInterval); // Update every 100ms
-
-  return () => clearInterval(interval); // Cleanup on unmount
-}, []);
+    updatePositions();
+    const interval = setInterval(updatePositions, updateInterval);
+    return () => clearInterval(interval);
+  }, [isHovered]); // 👈 Add hover dependency
 
 
   return (
-    <div className="logo-hero">
+    <div className="logo-hero" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
    <svg 
 	 viewBox="0 0 872.6 313.7">
     <g id="group1">
