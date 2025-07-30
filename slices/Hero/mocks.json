@@ -18,6 +18,15 @@
 			"hide_video": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"link": {
+				"__TYPE__": "LinkContent",
+				"key": "3ac1b617-2a81-4b4b-9a27-7ebe5ab92dcb",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "farmer"
+				}
 			}
 		},
 		"items": []

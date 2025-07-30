@@ -14,7 +14,39 @@
           "select": null,
           "allowTargetBlank": true,
           "allowText": true,
-          "repeat": true
+          "repeat": true,
+          "variants": ["Primary", "Secondary"]
+        }
+      },
+      "menu": {
+        "type": "Group",
+        "config": {
+          "label": "Menu",
+          "repeat": true,
+          "fields": {
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Link",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            },
+            "sublink": {
+              "type": "Link",
+              "config": {
+                "label": "Sublink",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": true
+              }
+            }
+          }
         }
       }
     }

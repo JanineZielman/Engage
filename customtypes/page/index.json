@@ -66,6 +66,15 @@
           "thumbnails": []
         }
       }
+    },
+    "Title": {
+      "title_svg": {
+        "type": "Text",
+        "config": {
+          "label": "Title SVG",
+          "placeholder": ""
+        }
+      }
     }
   }
 }

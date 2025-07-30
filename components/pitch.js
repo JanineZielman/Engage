@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation'
 const Logo = () => {
   const searchParams = useSearchParams()
   const search = searchParams.get('v')
-  console.log(search)
   useEffect(() => {
     const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%';
   

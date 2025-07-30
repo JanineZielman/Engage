@@ -23,7 +23,7 @@ export const Layout = ({ menu, children, page }) => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  });
 
   const handleLinkClick = () => setMobileOpen(false);
 
@@ -38,7 +38,7 @@ export const Layout = ({ menu, children, page }) => {
         <meta property="og:description" content={page.data.meta_description} />
       </Head>
 
-      <div className="container">
+      <div className={`container ${pathname.split("/").reverse()[0]}`}>
         {/* Header + Hamburger (mobile only) */}
         <div className="menu-header">
           <button
@@ -52,17 +52,32 @@ export const Layout = ({ menu, children, page }) => {
 
         {/* Desktop Menu */}
         <div className="menu">
-          {Array.isArray(menu.link) &&
-            menu.link.map((item, i) => {
-              const isActive = item.uid === pathname.split("/").reverse()[0];
+          {Array.isArray(menu.menu) &&
+            menu.menu.map((item, i) => {
+              const isActive = item.link.uid === pathname.split("/").reverse()[0];
               return (
-                <Link
-                  key={`link${i}`}
-                  href={`/${item.lang}/${item.slug === "homepage" ? "" : item.uid}`}
-                  className={isActive ? "active-menu-item" : ""}
-                >
-                  {item.text}
-                </Link>
+                <div className="menu-item">
+                  <Link
+                    key={`link${i}`}
+                    href={`/${item.link.lang}/${item.link.slug === "homepage" ? "" : item.link.uid}`}
+                    className={isActive ? "active-menu-item" : ""}
+                  >
+                    {item.link.text}
+                  </Link>
+                  <div className="sub">
+                    {item.sublink.map((sub, i) => {
+                      return(
+                        <Link
+                        key={`link${i}`}
+                        href={`/${sub.lang}/${sub.slug === "homepage" ? "" : sub.uid}`}
+                        className={isActive ? "active-menu-item" : ""}
+                      >
+                        {sub.text}
+                      </Link>
+                      )
+                    })}
+                  </div>
+                </div>
               );
             })}
 
@@ -99,17 +114,32 @@ export const Layout = ({ menu, children, page }) => {
 
           <nav className="drawer-links">
             {Array.isArray(menu.link) &&
-              menu.link.map((item, i) => {
-                const isActive = item.uid === pathname.split("/").reverse()[0];
+              menu.menu.map((item, i) => {
+                const isActive = item.link.uid === pathname.split("/").reverse()[0];
                 return (
+                  <div>
                   <Link
                     key={`mobile-link${i}`}
-                    href={`/${item.lang}/${item.slug === "homepage" ? "" : item.uid}`}
+                    href={`/${item.link.lang}/${item.slug === "homepage" ? "" : item.link.uid}`}
                     className={isActive ? "active-menu-item" : ""}
                     onClick={handleLinkClick}
                   >
-                    {item.text.toLowerCase()}
+                    {item.link.text.toLowerCase()}
                   </Link>
+                  <div className="sub">
+                    {item.sublink.map((sub, i) => {
+                      return(
+                        <Link
+                        key={`link${i}`}
+                        href={`/${sub.lang}/${sub.slug === "homepage" ? "" : sub.uid}`}
+                        className={isActive ? "active-menu-item" : ""}
+                      >
+                        {sub.text}
+                      </Link>
+                      )
+                    })}
+                  </div>
+                  </div>
                 );
               })}
           </nav>
@@ -135,7 +165,7 @@ export const Layout = ({ menu, children, page }) => {
         </div>
 
         {/* Page Content */}
-        <div className="page-content">{children}</div>
+        <div className={`page-content`}>{children}</div>
       </div>
     </>
   );

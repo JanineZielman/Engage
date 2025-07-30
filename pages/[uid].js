@@ -3,13 +3,18 @@ import { SliceZone } from "@prismicio/react";
 import { createClient } from "../prismicio";
 import { components } from "../slices";
 import { Layout } from "../components/Layout";
+import Logo3 from "../components/logo3";
 import Logo2 from "../components/logo2";
 
 const Page = ({ page, navigation }) => {
   return (
     <div className="page">
       <Layout menu={navigation.results[0].data} page={page}>
-        <Logo2 />
+        {page.data.title_svg ?
+          <Logo3 logo={page.data.title_svg}/>
+          :
+          <Logo2/>
+        }
         <SliceZone slices={page.data.slices} components={components} />
       </Layout>
     </div>
