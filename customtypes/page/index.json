@@ -27,12 +27,6 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "news": {
-              "type": "SharedSlice"
-            },
-            "team": {
-              "type": "SharedSlice"
-            },
             "buttons": {
               "type": "SharedSlice"
             },

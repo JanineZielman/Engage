@@ -224,12 +224,7 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice =
-  | NewsSlice
-  | TeamSlice
-  | ButtonsSlice
-  | HeroSlice
-  | RichTextSlice;
+type PageDocumentDataSlicesSlice = ButtonsSlice | HeroSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -426,93 +421,6 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
- * Item in *News → Default → Primary → News Item*
- */
-export interface NewsSliceDefaultPrimaryNewsItemItem {
-  /**
-   * Image field in *News → Default → Primary → News Item*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: news.default.primary.news_item[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Title field in *News → Default → Primary → News Item*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: news.default.primary.news_item[].title
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Description field in *News → Default → Primary → News Item*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: news.default.primary.news_item[].description
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  description: prismic.RichTextField;
-
-  /**
-   * Button field in *News → Default → Primary → News Item*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: news.default.primary.news_item[].button
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
-/**
- * Primary content in *News → Default → Primary*
- */
-export interface NewsSliceDefaultPrimary {
-  /**
-   * News Item field in *News → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: news.default.primary.news_item[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  news_item: prismic.GroupField<Simplify<NewsSliceDefaultPrimaryNewsItemItem>>;
-}
-
-/**
- * Default variation for News Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type NewsSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<NewsSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *News*
- */
-type NewsSliceVariation = NewsSliceDefault;
-
-/**
- * News Shared Slice
- *
- * - **API ID**: `news`
- * - **Description**: News
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type NewsSlice = prismic.SharedSlice<"news", NewsSliceVariation>;
-
-/**
  * Primary content in *RichText → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
@@ -578,93 +486,6 @@ export type RichTextSlice = prismic.SharedSlice<
   RichTextSliceVariation
 >;
 
-/**
- * Item in *Team → Default → Primary → Team Item*
- */
-export interface TeamSliceDefaultPrimaryTeamItemItem {
-  /**
-   * Image field in *Team → Default → Primary → Team Item*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.team_item[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Primary content in *Team → Default → Primary*
- */
-export interface TeamSliceDefaultPrimary {
-  /**
-   * Team Item field in *Team → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.team_item[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  team_item: prismic.GroupField<Simplify<TeamSliceDefaultPrimaryTeamItemItem>>;
-
-  /**
-   * Name field in *Team → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.name
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  name: prismic.KeyTextField;
-
-  /**
-   * Role field in *Team → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.role
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  role: prismic.RichTextField;
-
-  /**
-   * Description field in *Team → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.description
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  description: prismic.RichTextField;
-}
-
-/**
- * Default variation for Team Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type TeamSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TeamSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *Team*
- */
-type TeamSliceVariation = TeamSliceDefault;
-
-/**
- * Team Shared Slice
- *
- * - **API ID**: `team`
- * - **Description**: Team
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type TeamSlice = prismic.SharedSlice<"team", TeamSliceVariation>;
-
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -704,20 +525,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
-      NewsSlice,
-      NewsSliceDefaultPrimaryNewsItemItem,
-      NewsSliceDefaultPrimary,
-      NewsSliceVariation,
-      NewsSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
-      TeamSlice,
-      TeamSliceDefaultPrimaryTeamItemItem,
-      TeamSliceDefaultPrimary,
-      TeamSliceVariation,
-      TeamSliceDefault,
     };
   }
 }
