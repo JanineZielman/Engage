@@ -56,9 +56,8 @@ export const Layout = ({ menu, children, page }) => {
             menu.menu.map((item, i) => {
               const isActive = item.link.uid === pathname.split("/").reverse()[0];
               return (
-                <div className="menu-item">
+                <div className="menu-item"  key={`link${i}`}>
                   <Link
-                    key={`link${i}`}
                     href={`/${item.link.lang}/${item.link.slug === "homepage" ? "" : item.link.uid}`}
                     className={isActive ? "active-menu-item" : ""}
                   >
@@ -68,7 +67,7 @@ export const Layout = ({ menu, children, page }) => {
                     {item.sublink.map((sub, i) => {
                       return(
                         <Link
-                        key={`link${i}`}
+                        key={`link2${i}`}
                         href={`/${sub.lang}/${sub.slug === "homepage" ? "" : sub.uid}`}
                         className={isActive ? "active-menu-item" : ""}
                       >
@@ -117,9 +116,8 @@ export const Layout = ({ menu, children, page }) => {
               menu.menu.map((item, i) => {
                 const isActive = item.link.uid === pathname.split("/").reverse()[0];
                 return (
-                  <div>
+                  <div key={`mobile-link${i}`}>
                   <Link
-                    key={`mobile-link${i}`}
                     href={`/${item.link.lang}/${item.slug === "homepage" ? "" : item.link.uid}`}
                     className={isActive ? "active-menu-item" : ""}
                     onClick={handleLinkClick}
@@ -130,7 +128,7 @@ export const Layout = ({ menu, children, page }) => {
                     {item.sublink.map((sub, i) => {
                       return(
                         <Link
-                        key={`link${i}`}
+                        key={`sub${i}`}
                         href={`/${sub.lang}/${sub.slug === "homepage" ? "" : sub.uid}`}
                         className={isActive ? "active-menu-item" : ""}
                       >
