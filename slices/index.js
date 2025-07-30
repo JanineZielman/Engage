@@ -3,16 +3,19 @@
 import Buttons from './Buttons';
 import Hero from './Hero';
 import RichText from './RichText';
+import NewsItem from './NewsItem';
 
 
 export {
 	Buttons,
 	Hero,
 	RichText,
+	NewsItem
 };
 
 export const components = {
 	buttons: Buttons,
 	hero: Hero,
 	rich_text: RichText,
+	news_item: NewsItem
 };

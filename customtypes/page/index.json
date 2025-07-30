@@ -27,6 +27,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "news_item": {
+              "type": "SharedSlice"
+            },
             "buttons": {
               "type": "SharedSlice"
             },

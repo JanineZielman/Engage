@@ -503,6 +503,20 @@ p a{
   }
 }
 
+.button a{
+  margin-bottom: 24px;
+  padding: 5px 10px;
+  background-color: $orange;
+  color: $purple;
+  margin-top: 24px;
+  font-weight: 500;
+  display: block;
+  text-align: center;
+  &:hover{
+    background-color: $blue;
+  }
+}
+
 .bg-vid{
   position: fixed;
   z-index: -1;
@@ -563,9 +577,34 @@ p a{
   }
 }
 
+.news-grid{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2vw 2vw 2vw;
+  .news-item{
+    width: 29%;
+    margin-right: 1.5%;
+    color: $orange;
+    img{
+      width: 100%;
+      height: auto;
+    }
+    p{
+      font-weight: 300;
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .menu{
     display: none;
+  }
+  .news-grid{
+    flex-direction: column;
+    .news-item{
+      width: 100%;
+      margin-bottom: 48px;
+    }
   }
   .textWrapper{
     max-width: 100%;

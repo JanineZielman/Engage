@@ -224,7 +224,11 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = ButtonsSlice | HeroSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice =
+  | NewsItemSlice
+  | ButtonsSlice
+  | HeroSlice
+  | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -421,6 +425,96 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Item in *NewsItem → Default → Primary → Item*
+ */
+export interface NewsItemSliceDefaultPrimaryItemItem {
+  /**
+   * Image field in *NewsItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.item[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *NewsItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.item[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *NewsItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.item[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Button field in *NewsItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.item[].button
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *NewsItem → Default → Primary*
+ */
+export interface NewsItemSliceDefaultPrimary {
+  /**
+   * Item field in *NewsItem → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.item[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  item: prismic.GroupField<Simplify<NewsItemSliceDefaultPrimaryItemItem>>;
+}
+
+/**
+ * Default variation for NewsItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NewsItemSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<NewsItemSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *NewsItem*
+ */
+type NewsItemSliceVariation = NewsItemSliceDefault;
+
+/**
+ * NewsItem Shared Slice
+ *
+ * - **API ID**: `news_item`
+ * - **Description**: NewsItem
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NewsItemSlice = prismic.SharedSlice<
+  "news_item",
+  NewsItemSliceVariation
+>;
+
+/**
  * Primary content in *RichText → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
@@ -525,6 +619,11 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      NewsItemSlice,
+      NewsItemSliceDefaultPrimaryItemItem,
+      NewsItemSliceDefaultPrimary,
+      NewsItemSliceVariation,
+      NewsItemSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,

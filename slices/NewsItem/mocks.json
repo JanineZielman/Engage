@@ -1,0 +1,79 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"item": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+										"width": 3648,
+										"height": 4560
+									},
+									"url": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?rect=0%2C0%2C3648%2C4560&w=600&h=750",
+									"width": 600,
+									"height": 750,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "chemical",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "special",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Elit culpa magna est aute pariatur."
+											}
+										}
+									]
+								}
+							],
+							[
+								"button",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "6b7ad5bb-dbb2-4207-8fe1-cb5eecfb112a",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com",
+										"text": "plain"
+									}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
