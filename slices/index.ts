@@ -7,4 +7,5 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   news_item: dynamic(() => import("./NewsItem")),
   rich_text: dynamic(() => import("./RichText")),
+  team_item: dynamic(() => import("./TeamItem")),
 };

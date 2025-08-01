@@ -6,18 +6,6 @@
   "status": true,
   "json": {
     "Main": {
-      "link": {
-        "type": "Link",
-        "config": {
-          "label": "Link",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true,
-          "variants": ["Primary", "Secondary"]
-        }
-      },
       "menu": {
         "type": "Group",
         "config": {

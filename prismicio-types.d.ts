@@ -178,25 +178,6 @@ export interface NavigationDocumentDataMenuItem {
  */
 interface NavigationDocumentData {
   /**
-   * Link field in *Navigation*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation.link
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.Repeatable<
-    prismic.LinkField<
-      string,
-      string,
-      unknown,
-      prismic.FieldState,
-      "Primary" | "Secondary"
-    >
-  >;
-
-  /**
    * Menu field in *Navigation*
    *
    * - **Field Type**: Group
@@ -225,6 +206,7 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | TeamItemSlice
   | NewsItemSlice
   | ButtonsSlice
   | HeroSlice
@@ -580,6 +562,96 @@ export type RichTextSlice = prismic.SharedSlice<
   RichTextSliceVariation
 >;
 
+/**
+ * Item in *TeamItem → Default → Primary → Item*
+ */
+export interface TeamItemSliceDefaultPrimaryItemItem {
+  /**
+   * Image field in *TeamItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_item.default.primary.item[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *TeamItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_item.default.primary.item[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Role field in *TeamItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_item.default.primary.item[].role
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  role: prismic.RichTextField;
+
+  /**
+   * Description field in *TeamItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_item.default.primary.item[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *TeamItem → Default → Primary*
+ */
+export interface TeamItemSliceDefaultPrimary {
+  /**
+   * Item field in *TeamItem → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_item.default.primary.item[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  item: prismic.GroupField<Simplify<TeamItemSliceDefaultPrimaryItemItem>>;
+}
+
+/**
+ * Default variation for TeamItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TeamItemSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamItemSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TeamItem*
+ */
+type TeamItemSliceVariation = TeamItemSliceDefault;
+
+/**
+ * TeamItem Shared Slice
+ *
+ * - **API ID**: `team_item`
+ * - **Description**: TeamItem
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TeamItemSlice = prismic.SharedSlice<
+  "team_item",
+  TeamItemSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -628,6 +700,11 @@ declare module "@prismicio/client" {
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
+      TeamItemSlice,
+      TeamItemSliceDefaultPrimaryItemItem,
+      TeamItemSliceDefaultPrimary,
+      TeamItemSliceVariation,
+      TeamItemSliceDefault,
     };
   }
 }

@@ -82,8 +82,8 @@ export const Layout = ({ menu, children, page }) => {
 
           <div className="language-switcher">
             {Object.entries(LOCALES).map(([locale, label], i) => {
-              const isActive = menu.link[0].lang === locale;
-              const newPathname = pathname.replace(menu.link[0].lang, locale);
+              const isActive = menu.menu[0].link.lang === locale;
+              const newPathname = pathname.replace(menu.menu[0].link.lang, locale);
               return (
                 <span key={locale}>
                   <a
@@ -144,8 +144,8 @@ export const Layout = ({ menu, children, page }) => {
 
           <div className="drawer-language-switcher">
             {Object.entries(LOCALES).map(([locale, label], i) => {
-              const isActive = menu.link[0].lang === locale;
-              const newPathname = pathname.replace(menu.link[0].lang, locale);
+              const isActive = menu.menu[0].link.lang === locale;
+              const newPathname = pathname.replace(menu.menu[0].link.lang, locale);
               return (
                 <span key={locale}>
                   <a
