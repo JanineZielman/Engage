@@ -66,13 +66,13 @@ export const Layout = ({ menu, children, page }) => {
                   <div className="sub">
                     {item.sublink.map((sub, i) => {
                       return(
-                        <Link
+                        <a
                         key={`link2${i}`}
-                        href={`/${sub.lang}/${sub.slug === "homepage" ? "" : sub.uid}`}
+                        href={`/${sub.lang}/#${sub.uid}`}
                         className={isActive ? "active-menu-item" : ""}
                       >
                         {sub.text}
-                      </Link>
+                      </a>
                       )
                     })}
                   </div>
@@ -127,13 +127,13 @@ export const Layout = ({ menu, children, page }) => {
                   <div className="sub">
                     {item.sublink.map((sub, i) => {
                       return(
-                        <Link
+                        <a
                         key={`sub${i}`}
-                        href={`/${sub.lang}/${sub.slug === "homepage" ? "" : sub.uid}`}
+                        href={`/${sub.lang}/#${sub.uid}`}
                         className={isActive ? "active-menu-item" : ""}
                       >
                         {sub.text}
-                      </Link>
+                      </a>
                       )
                     })}
                   </div>
