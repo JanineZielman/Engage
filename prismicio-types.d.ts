@@ -217,6 +217,7 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | EventItemSlice
   | TeamItemSlice
   | NewsItemSlice
   | ButtonsSlice
@@ -352,6 +353,116 @@ type ButtonsSliceVariation = ButtonsSliceDefault;
 export type ButtonsSlice = prismic.SharedSlice<
   "buttons",
   ButtonsSliceVariation
+>;
+
+/**
+ * Item in *EventItem → Default → Primary → Item*
+ */
+export interface EventItemSliceDefaultPrimaryItemItem {
+  /**
+   * Title field in *EventItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Image field in *EventItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Date field in *EventItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[].date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Time field in *EventItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[].time
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  time: prismic.KeyTextField;
+
+  /**
+   * Description field in *EventItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Button field in *EventItem → Default → Primary → Item*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[].button
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *EventItem → Default → Primary*
+ */
+export interface EventItemSliceDefaultPrimary {
+  /**
+   * Item field in *EventItem → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_item.default.primary.item[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  item: prismic.GroupField<Simplify<EventItemSliceDefaultPrimaryItemItem>>;
+}
+
+/**
+ * Default variation for EventItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EventItemSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EventItemSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *EventItem*
+ */
+type EventItemSliceVariation = EventItemSliceDefault;
+
+/**
+ * EventItem Shared Slice
+ *
+ * - **API ID**: `event_item`
+ * - **Description**: EventItem
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EventItemSlice = prismic.SharedSlice<
+  "event_item",
+  EventItemSliceVariation
 >;
 
 /**
@@ -698,6 +809,11 @@ declare module "@prismicio/client" {
       ButtonsSliceDefaultPrimary,
       ButtonsSliceVariation,
       ButtonsSliceDefault,
+      EventItemSlice,
+      EventItemSliceDefaultPrimaryItemItem,
+      EventItemSliceDefaultPrimary,
+      EventItemSliceVariation,
+      EventItemSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,

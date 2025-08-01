@@ -51,6 +51,10 @@ p a{
   text-decoration: underline;
 }
 
+h3{
+  font-size: 20px;
+}
+
 // Shared styles
 .active-language,
 .active-menu-item {
@@ -596,6 +600,41 @@ p a{
   }
 }
 
+.events-grid{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2vw 2vw 2vw 2vw;
+  .event-item{
+    width: 29%;
+    margin-right: 1.5%;
+    color: $orange;
+    background-color: $purple;
+    padding: 14px;
+    img{
+      width: 100%;
+      height: auto;
+    }
+    h3{
+      color: $blue;
+      margin: 0 0 14px 0;
+    }
+    p{
+      font-weight: 300;
+      margin: 0;
+      color: $blue;
+    }
+    .date-time{
+      display: flex;
+      justify-content: space-between;
+      margin: 14px 0;
+      font-size: 17px;
+    }
+    .button a{
+      margin-bottom: 10px;
+    }
+  }
+}
+
 .team-grid{
   display: flex;
   flex-wrap: wrap;
@@ -659,6 +698,13 @@ footer{
   .news-grid{
     flex-direction: column;
     .news-item{
+      width: 100%;
+      margin-bottom: 48px;
+    }
+  }
+  .events-grid{
+    flex-direction: column;
+    .event-item{
       width: 100%;
       margin-bottom: 48px;
     }

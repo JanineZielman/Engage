@@ -68,7 +68,7 @@ export const Layout = ({ menu, children, page }) => {
                       return(
                         <a
                         key={`link2${i}`}
-                        href={`/${sub.lang}/#${sub.uid}`}
+                        href={`/${sub.lang}/${sub.uid}`}
                         className={isActive ? "active-menu-item" : ""}
                       >
                         {sub.text}
@@ -129,7 +129,7 @@ export const Layout = ({ menu, children, page }) => {
                       return(
                         <a
                         key={`sub${i}`}
-                        href={`/${sub.lang}/#${sub.uid}`}
+                        href={`/${sub.lang}/${sub.uid}`}
                         className={isActive ? "active-menu-item" : ""}
                       >
                         {sub.text}

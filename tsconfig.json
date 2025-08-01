@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/pitch/index.js", "pages/opencall-animation/index.js", "pages/logo/index.js", "pages/animation/index.js", "slices/RichText/index.js", "slices/NewsItem/index.js", "slices/TeamItem/index.js"  ],
+, "pages/pitch/index.js", "pages/opencall-animation/index.js", "pages/logo/index.js", "pages/animation/index.js", "slices/RichText/index.js", "slices/NewsItem/index.js", "slices/TeamItem/index.js", "slices/EventItem/index.js"  ],
   "exclude": [
     "node_modules"
   ]

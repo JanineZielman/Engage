@@ -5,7 +5,7 @@ import { createClient } from "../prismicio";
 import { Layout } from "../components/Layout";
 import Logo3 from "../components/logo3";
 
-const Index = ({ home, navigation, about, team}) => {
+const Index = ({ home, navigation, about}) => {
   return (
     <div className="homepage">
       <Layout menu={navigation.results[0].data} page={home}>
@@ -14,12 +14,6 @@ const Index = ({ home, navigation, about, team}) => {
           <div className="page" id="about">
             <Logo3 logo={about.data.title_svg}/>
             <SliceZone slices={about.data.slices} components={components} />
-          </div>
-        }
-        {team?.data.slices &&
-          <div className="page" id="team">
-            <Logo3 logo={team.data.title_svg}/>
-            <SliceZone slices={team.data.slices} components={components} />
           </div>
         }
       </Layout>
@@ -34,7 +28,6 @@ export async function getStaticProps({ locale, previewData }) {
 
   const home = await client.getSingle("homepage", { lang: locale });
   const about = await client.getByUID("page", "about", { lang: locale });
-  const team = await client.getByUID("page", "team", { lang: locale });
   const navigation = await client.getByType("navigation",  { lang: locale });
 
 
@@ -42,8 +35,7 @@ export async function getStaticProps({ locale, previewData }) {
     props: {
      home,
      navigation,
-     about,
-     team
+     about
     },
   };
 }

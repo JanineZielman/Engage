@@ -5,6 +5,7 @@ import Hero from './Hero';
 import RichText from './RichText';
 import NewsItem from './NewsItem';
 import TeamItem from './TeamItem';
+import EventItem from './EventItem';
 
 
 export {
@@ -12,7 +13,8 @@ export {
 	Hero,
 	RichText,
 	NewsItem,
-	TeamItem
+	TeamItem,
+	EventItem
 };
 
 export const components = {
@@ -20,5 +22,6 @@ export const components = {
 	hero: Hero,
 	rich_text: RichText,
 	news_item: NewsItem,
-	team_item: TeamItem
+	team_item: TeamItem,
+	event_item: EventItem
 };
