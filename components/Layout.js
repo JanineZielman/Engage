@@ -165,6 +165,9 @@ export const Layout = ({ menu, children, page }) => {
         {/* Page Content */}
         <div className={`page-content`}>{children}</div>
       </div>
+      <footer>
+        engage rotterdam © 2025
+      </footer>
     </>
   );
 };

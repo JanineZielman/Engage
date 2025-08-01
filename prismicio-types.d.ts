@@ -187,6 +187,17 @@ interface NavigationDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   menu: prismic.GroupField<Simplify<NavigationDocumentDataMenuItem>>;
+
+  /**
+   * Footer field in *Navigation*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.footer
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  footer: prismic.RichTextField;
 }
 
 /**

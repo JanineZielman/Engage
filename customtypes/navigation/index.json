@@ -36,6 +36,15 @@
             }
           }
         }
+      },
+      "footer": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Footer",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
+        }
       }
     }
   }

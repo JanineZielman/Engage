@@ -12,10 +12,14 @@ const TeamItem = ({ slice }) => {
     >
       {slice.primary.item.map((item) => (
       <div className="team-item">
-        <PrismicNextImage field={item.image} />
+        <div className="image">
+          <PrismicNextImage field={item.image} />
+          <div className="role">
+            <PrismicRichText field={item.role} />
+          </div>
+        </div>
         <h3>{item.name}</h3>
         <PrismicRichText field={item.description} />
-        {/* <PrismicRichText field={item.role} /> */}
       </div>
     ))}
     </section>
