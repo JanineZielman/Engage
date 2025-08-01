@@ -3,7 +3,7 @@ import { components } from "../slices";
 
 import { createClient } from "../prismicio";
 import { Layout } from "../components/Layout";
-
+import Logo3 from "../components/logo3";
 
 const Index = ({ home, navigation, about, team}) => {
   return (
@@ -11,12 +11,14 @@ const Index = ({ home, navigation, about, team}) => {
       <Layout menu={navigation.results[0].data} page={home}>
         <SliceZone slices={home.data.slices} components={components} />
         {about?.data.slices &&
-          <div id="about">
+          <div className="page" id="about">
+            <Logo3 logo={about.data.title_svg}/>
             <SliceZone slices={about.data.slices} components={components} />
           </div>
         }
         {team?.data.slices &&
-          <div id="team">
+          <div className="page" id="team">
+            <Logo3 logo={team.data.title_svg}/>
             <SliceZone slices={team.data.slices} components={components} />
           </div>
         }

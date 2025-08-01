@@ -1,24 +1,25 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Logo3 = ({ logo }) => {
+  const containerRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    const getRandomOffset = (factor = 1) => (Math.random() * 4 - 2) * factor + '%';
+    const getRandomOffset = (factor = 1) => (Math.random() * 3 - 2) * factor + '%';
 
     const groups = [];
 
-    for (let i = 1; i <= 12; i++) {
-      const group = document.querySelector(`#Laag_${i}`);
+    for (let i = 1; i <= 24; i++) {
+      const group = containerRef.current?.querySelector(`#Laag_${i}`);
       if (group) {
         groups.push({
           id: i,
           group,
           polygons: group.querySelectorAll('polygon'),
           paths: group.querySelectorAll('path'),
-          polylines: group.querySelectorAll('polyline')
+          polylines: group.querySelectorAll('polyline'),
         });
       }
     }
@@ -29,7 +30,7 @@ const Logo3 = ({ logo }) => {
 
     const updatePositions = () => {
       const progress = (timeElapsed / cycleDuration) * Math.PI;
-      let baseFactor = Math.sin(progress);
+      const baseFactor = Math.sin(progress);
       const factorBoost = isHovered ? 25 : 1;
       const combinedFactor = baseFactor * factorBoost;
 
@@ -65,11 +66,12 @@ const Logo3 = ({ logo }) => {
     const interval = setInterval(updatePositions, updateInterval);
 
     return () => clearInterval(interval);
-  }, [isHovered]); // 👈 this makes the effect reactive to hover
+  }, [isHovered]);
 
   return (
     <div
       className="logo-hero page-title"
+      ref={containerRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
