@@ -4,18 +4,21 @@ import Buttons from './Buttons';
 import Hero from './Hero';
 import RichText from './RichText';
 import NewsItem from './NewsItem';
+import TeamItem from './TeamItem';
 
 
 export {
 	Buttons,
 	Hero,
 	RichText,
-	NewsItem
+	NewsItem,
+	TeamItem
 };
 
 export const components = {
 	buttons: Buttons,
 	hero: Hero,
 	rich_text: RichText,
-	news_item: NewsItem
+	news_item: NewsItem,
+	team_item: TeamItem
 };
