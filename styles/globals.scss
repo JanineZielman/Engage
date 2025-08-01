@@ -676,15 +676,15 @@ h3{
         justify-content: space-between;
         text-align: center;
       }
-      &:hover{
-        background-color: $orange;
-        img{
-          opacity: 0;
-        }
-        .role{
-          display: flex;
-        }
-      }
+      // &:hover{
+      //   background-color: $orange;
+      //   img{
+      //     opacity: 0;
+      //   }
+      //   .role{
+      //     display: flex;
+      //   }
+      // }
     }
     img{
       width: 100%;
