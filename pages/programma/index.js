@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Programma = ({ page, navigation, events}) => {
   console.log(events)
-   const [filter, setFilter] = useState("alles");
+   const [filter, setFilter] = useState("aankomend");
   
     const today = new Date();
   
