@@ -25,6 +25,9 @@ export const linkResolver = (doc) => {
   if (doc.type === "homepage") {
     return `/${doc.lang}`;
   }
+  if (doc.type === "programma") {
+    return `/${doc.lang}/programma`;
+  }
   return `/${doc.lang}`;
 };
 

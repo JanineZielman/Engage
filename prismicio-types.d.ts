@@ -430,11 +430,97 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
+type ProgrammaDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Programma documents
+ */
+interface ProgrammaDocumentData {
+  /**
+   * Title field in *Programma*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: programma.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Programma*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: programma.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<ProgrammaDocumentDataSlicesSlice> /**
+   * Meta Title field in *Programma*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: programma.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Programma*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: programma.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Programma*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: programma.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never> /**
+   * Title SVG field in *Programma*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: programma.title_svg
+   * - **Tab**: Title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  title_svg: prismic.KeyTextField;
+}
+
+/**
+ * Programma document from Prismic
+ *
+ * - **API ID**: `programma`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProgrammaDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<ProgrammaDocumentData>,
+    "programma",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | EventDocument
   | HomepageDocument
   | NavigationDocument
-  | PageDocument;
+  | PageDocument
+  | ProgrammaDocument;
 
 /**
  * Primary content in *Buttons → Default → Primary*
@@ -1014,6 +1100,9 @@ declare module "@prismicio/client" {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      ProgrammaDocument,
+      ProgrammaDocumentData,
+      ProgrammaDocumentDataSlicesSlice,
       AllDocumentTypes,
       ButtonsSlice,
       ButtonsSliceDefaultPrimary,
