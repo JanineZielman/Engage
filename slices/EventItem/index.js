@@ -38,12 +38,6 @@ const EventItem = ({ slice }) => {
     >
       <div className="filter-buttons">
         <div
-          onClick={() => setFilter("alles")}
-          className={`${filter === "alles" ? "active" : ""}`}
-        >
-          Alles
-        </div>
-        <div
           onClick={() => setFilter("aankomend")}
           className={`${filter === "aankomend" ? "active" : ""}`}
         >
@@ -53,7 +47,13 @@ const EventItem = ({ slice }) => {
           onClick={() => setFilter("afgelopen")}
           className={`${filter === "afgelopen" ? "active" : ""}`}
         >
-          Afgelopen
+          Verleden
+        </div>
+        <div
+          onClick={() => setFilter("alles")}
+          className={`${filter === "alles" ? "active" : ""}`}
+        >
+          Alles
         </div>
       </div>
       <div className="events-grid">

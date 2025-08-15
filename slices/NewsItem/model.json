@@ -57,6 +57,68 @@
               }
             }
           }
+        },
+        "upcoming": {
+          "type": "Group",
+          "config": {
+            "label": "Upcoming",
+            "repeat": true,
+            "fields": {
+              "event": {
+                "type": "Link",
+                "config": {
+                  "label": "Event",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "event",
+                      "fields": [
+                        "title",
+                        "image",
+                        "date",
+                        "time",
+                        "description",
+                        "button"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "blog": {
+          "type": "Group",
+          "config": {
+            "label": "Blog",
+            "repeat": true,
+            "fields": {
+              "blog_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Blog Title",
+                  "placeholder": ""
+                }
+              },
+              "date": {
+                "type": "Date",
+                "config": {
+                  "label": "Date",
+                  "placeholder": ""
+                }
+              },
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Text",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+                }
+              }
+            }
+          }
         }
       },
       "items": {}

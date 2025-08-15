@@ -60,13 +60,74 @@
 							[
 								"button",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "6b7ad5bb-dbb2-4207-8fe1-cb5eecfb112a",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
 										"url": "http://twitter.com",
 										"text": "plain"
 									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"upcoming": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"event",
+								{
+									"key": "31ef2241-3c9c-41d0-9dd1-24b4e330efa2",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"blog": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"blog_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "saw",
+									"type": "Text"
+								}
+							],
+							[
+								"text",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Ullamco veniam non velit occaecat id amet irure sunt cupidatat pariatur veniam quis dolore officia voluptate."
+											}
+										}
+									]
+								}
+							],
+							[
+								"date",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Date",
+									"value": "2024-05-14"
 								}
 							]
 						]

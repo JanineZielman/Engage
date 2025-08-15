@@ -70,6 +70,133 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type EventDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Event documents
+ */
+interface EventDocumentData {
+  /**
+   * Title field in *Event*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Image field in *Event*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Date field in *Event*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Time field in *Event*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.time
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  time: prismic.KeyTextField;
+
+  /**
+   * Description field in *Event*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Button field in *Event*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Slice Zone field in *Event*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<EventDocumentDataSlicesSlice> /**
+   * Meta Title field in *Event*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: event.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Event*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: event.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Event*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Event document from Prismic
+ *
+ * - **API ID**: `event`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type EventDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<EventDocumentData>, "event", Lang>;
+
 type HomepageDocumentDataSlicesSlice = ButtonsSlice | RichTextSlice | HeroSlice;
 
 /**
@@ -304,6 +431,7 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 export type AllDocumentTypes =
+  | EventDocument
   | HomepageDocument
   | NavigationDocument
   | PageDocument;
@@ -574,6 +702,63 @@ export interface NewsItemSliceDefaultPrimaryItemItem {
 }
 
 /**
+ * Item in *NewsItem → Default → Primary → Upcoming*
+ */
+export interface NewsItemSliceDefaultPrimaryUpcomingItem {
+  /**
+   * Event field in *NewsItem → Default → Primary → Upcoming*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.upcoming[].event
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  event: ContentRelationshipFieldWithData<
+    [
+      {
+        id: "event";
+        fields: ["title", "image", "date", "time", "description", "button"];
+      },
+    ]
+  >;
+}
+
+/**
+ * Item in *NewsItem → Default → Primary → Blog*
+ */
+export interface NewsItemSliceDefaultPrimaryBlogItem {
+  /**
+   * Blog Title field in *NewsItem → Default → Primary → Blog*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.blog[].blog_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  blog_title: prismic.KeyTextField;
+
+  /**
+   * Date field in *NewsItem → Default → Primary → Blog*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.blog[].date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Text field in *NewsItem → Default → Primary → Blog*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.blog[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+}
+
+/**
  * Primary content in *NewsItem → Default → Primary*
  */
 export interface NewsItemSliceDefaultPrimary {
@@ -586,6 +771,28 @@ export interface NewsItemSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   item: prismic.GroupField<Simplify<NewsItemSliceDefaultPrimaryItemItem>>;
+
+  /**
+   * Upcoming field in *NewsItem → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.upcoming[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  upcoming: prismic.GroupField<
+    Simplify<NewsItemSliceDefaultPrimaryUpcomingItem>
+  >;
+
+  /**
+   * Blog field in *NewsItem → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: news_item.default.primary.blog[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  blog: prismic.GroupField<Simplify<NewsItemSliceDefaultPrimaryBlogItem>>;
 }
 
 /**
@@ -795,6 +1002,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      EventDocument,
+      EventDocumentData,
+      EventDocumentDataSlicesSlice,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
@@ -820,6 +1030,8 @@ declare module "@prismicio/client" {
       HeroSliceDefault,
       NewsItemSlice,
       NewsItemSliceDefaultPrimaryItemItem,
+      NewsItemSliceDefaultPrimaryUpcomingItem,
+      NewsItemSliceDefaultPrimaryBlogItem,
       NewsItemSliceDefaultPrimary,
       NewsItemSliceVariation,
       NewsItemSliceDefault,
