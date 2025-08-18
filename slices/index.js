@@ -6,6 +6,7 @@ import RichText from './RichText';
 import NewsItem from './NewsItem';
 import TeamItem from './TeamItem';
 import EventItem from './EventItem';
+import Columns from './Columns'
 
 
 export {
@@ -14,7 +15,8 @@ export {
 	RichText,
 	NewsItem,
 	TeamItem,
-	EventItem
+	EventItem,
+	Columns
 };
 
 export const components = {
@@ -23,5 +25,6 @@ export const components = {
 	rich_text: RichText,
 	news_item: NewsItem,
 	team_item: TeamItem,
-	event_item: EventItem
+	event_item: EventItem,
+	columns: Columns
 };

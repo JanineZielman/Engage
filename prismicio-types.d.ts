@@ -208,7 +208,7 @@ interface EventDocumentData {
 export type EventDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<EventDocumentData>, "event", Lang>;
 
-type HomepageDocumentDataSlicesSlice = ButtonsSlice | RichTextSlice | HeroSlice;
+type HomepageDocumentDataSlicesSlice = ButtonsSlice | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -355,6 +355,7 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | ColumnsSlice
   | TeamItemSlice
   | NewsItemSlice
   | ButtonsSlice
@@ -577,6 +578,66 @@ type ButtonsSliceVariation = ButtonsSliceDefault;
 export type ButtonsSlice = prismic.SharedSlice<
   "buttons",
   ButtonsSliceVariation
+>;
+
+/**
+ * Item in *Columns → Default → Primary → Columns*
+ */
+export interface ColumnsSliceDefaultPrimaryColumnsItem {
+  /**
+   * Text field in *Columns → Default → Primary → Columns*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: columns.default.primary.columns[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Columns → Default → Primary*
+ */
+export interface ColumnsSliceDefaultPrimary {
+  /**
+   * Columns field in *Columns → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: columns.default.primary.columns[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  columns: prismic.GroupField<Simplify<ColumnsSliceDefaultPrimaryColumnsItem>>;
+}
+
+/**
+ * Default variation for Columns Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ColumnsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ColumnsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Columns*
+ */
+type ColumnsSliceVariation = ColumnsSliceDefault;
+
+/**
+ * Columns Shared Slice
+ *
+ * - **API ID**: `columns`
+ * - **Description**: Columns
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ColumnsSlice = prismic.SharedSlice<
+  "columns",
+  ColumnsSliceVariation
 >;
 
 /**
@@ -1118,6 +1179,11 @@ declare module "@prismicio/client" {
       ButtonsSliceDefaultPrimary,
       ButtonsSliceVariation,
       ButtonsSliceDefault,
+      ColumnsSlice,
+      ColumnsSliceDefaultPrimaryColumnsItem,
+      ColumnsSliceDefaultPrimary,
+      ColumnsSliceVariation,
+      ColumnsSliceDefault,
       EventItemSlice,
       EventItemSliceDefaultPrimaryItemItem,
       EventItemSliceDefaultPrimary,

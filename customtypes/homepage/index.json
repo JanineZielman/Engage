@@ -23,9 +23,6 @@
             "buttons": {
               "type": "SharedSlice"
             },
-            "rich_text": {
-              "type": "SharedSlice"
-            },
             "hero": {
               "type": "SharedSlice"
             }
