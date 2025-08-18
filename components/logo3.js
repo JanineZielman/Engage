@@ -11,7 +11,7 @@ const Logo3 = ({ logo }) => {
 
     const groups = [];
 
-    for (let i = 1; i <= 24; i++) {
+    for (let i = 1; i <= 300; i++) {
       const group = containerRef.current?.querySelector(`#Laag_${i}`);
       if (group) {
         groups.push({
