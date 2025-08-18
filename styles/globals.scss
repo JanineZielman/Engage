@@ -726,6 +726,10 @@ h3{
   }
 }
 
+p a{
+  color: inherit!important;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
