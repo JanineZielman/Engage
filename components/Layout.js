@@ -56,11 +56,11 @@ export const Layout = ({ menu, children, page }) => {
         <div className="menu">
           {Array.isArray(menu.menu) &&
             menu.menu.map((item, i) => {
-              const isActive = item.link.slug === pathname.split("/").reverse()[0];
+              const isActive = item.link.uid === pathname.split("/").reverse()[0];
               return (
                 <div className="menu-item"  key={`link${i}`}>
                   <Link
-                    href={`/${item.link.lang}/${item.link.slug === "homepage" ? "" : item.link.slug}`}
+                    href={`/${item.link.lang}/${item.link.slug === "homepage" ? "" : item.link.uid}`}
                     className={isActive ? "active-menu-item" : ""}
                   >
                     {item.link.text}
@@ -116,11 +116,11 @@ export const Layout = ({ menu, children, page }) => {
           <nav className="drawer-links">
             {Array.isArray(menu.menu) &&
               menu.menu.map((item, i) => {
-                const isActive = item.link.slug === pathname.split("/").reverse()[0];
+                const isActive = item.link.uid === pathname.split("/").reverse()[0];
                 return (
                   <div key={`mobile-link${i}`}>
                   <Link
-                    href={`/${item.link.lang}/${item.slug === "homepage" ? "" : item.link.slug}`}
+                    href={`/${item.link.lang}/${item.slug === "homepage" ? "" : item.link.uid}`}
                     className={isActive ? "active-menu-item" : ""}
                     onClick={handleLinkClick}
                   >

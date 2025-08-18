@@ -27,9 +27,6 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "event_item": {
-              "type": "SharedSlice"
-            },
             "team_item": {
               "type": "SharedSlice"
             },

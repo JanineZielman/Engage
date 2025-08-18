@@ -143,6 +143,17 @@ interface EventDocumentData {
   button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
+   * Long description field in *Event*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.long_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  long_description: prismic.RichTextField;
+
+  /**
    * Slice Zone field in *Event*
    *
    * - **Field Type**: Slice Zone
@@ -344,7 +355,6 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
-  | EventItemSlice
   | TeamItemSlice
   | NewsItemSlice
   | ButtonsSlice
@@ -509,7 +519,7 @@ interface ProgrammaDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type ProgrammaDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
+  prismic.PrismicDocumentWithUID<
     Simplify<ProgrammaDocumentData>,
     "programma",
     Lang

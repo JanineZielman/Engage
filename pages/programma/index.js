@@ -122,7 +122,7 @@ const Programma = ({ page, navigation, events }) => {
               )}
             </div>
             <h2>{selectedEvent.data.title}</h2>
-            <PrismicRichText field={selectedEvent.data.description} />
+            <PrismicRichText field={selectedEvent.data.long_description} />
           </div>
         </div>
       )}

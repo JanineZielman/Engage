@@ -63,6 +63,15 @@
           "repeat": false
         }
       },
+      "long_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Long description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,hyperlink,strong,em,list-item,o-list-item"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
