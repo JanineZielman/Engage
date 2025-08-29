@@ -7,7 +7,6 @@ import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 
 const Programma = ({ page, navigation, events }) => {
-  console.log(events)
   const [filter, setFilter] = useState("aankomend");
   const [selectedEvent, setSelectedEvent] = useState(null);
 

@@ -43,7 +43,7 @@
           "label": "Footer",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
         }
       }
     }

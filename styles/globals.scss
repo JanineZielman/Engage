@@ -300,6 +300,8 @@ h3{
   .column{
     font-weight: 300;
     font-size: 18px;
+    position: relative;
+    height: fit-content;
     li{
       margin-bottom: 10px;
     }
@@ -308,6 +310,19 @@ h3{
       height: auto;
       margin: auto;
       display: block;
+    }
+    .block-img{
+      position: relative;
+      &:hover{
+        &:nth-child(2n){
+          opacity: 1;
+         }
+      }
+    }
+    .block-img:nth-child(2n){
+        position: absolute;
+        bottom: 0;
+        opacity: 0;
     }
   }
   &.amount-2{
@@ -602,6 +617,11 @@ h3{
   .page-content *{
     color: $yellow;
   }
+  footer{
+    img{
+      display: none;
+    }
+  }
 }
 
 .programma{
@@ -621,6 +641,11 @@ h3{
   }
   .page-content {
     color: $purple;
+  }
+  footer{
+    p{
+      color: $purple;
+    }
   }
 }
 
@@ -915,9 +940,21 @@ p a{
 footer{
   text-align: center;
   padding: 24px;
-  color: $blue;
-  font-weight: 100;
-  font-size: 14px;
+  padding-top: 100px;
+  position: relative;
+  p{
+    color: $blue;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  img{
+    max-width: 200px;
+    height: auto;
+    position: absolute;
+    left: -20px;
+    top: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {

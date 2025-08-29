@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { PrismicRichText } from "@prismicio/react";
 
 const LOCALES = {
   "nl-nl": "nl",
@@ -116,7 +117,6 @@ export const Layout = ({ menu, children, page }) => {
           <nav className="drawer-links">
             {Array.isArray(menu.menu) &&
               menu.menu.map((item, i) => {
-                console.log(item)
                 const isActive = item.link.uid === pathname.split("/").reverse()[0];
                 return (
                   <div key={`mobile-link${i}`}>
@@ -168,8 +168,8 @@ export const Layout = ({ menu, children, page }) => {
         {/* Page Content */}
         <div className={`page-content`}>{children}</div>
         <footer>
-        engage rotterdam © 2025
-      </footer>
+          <PrismicRichText field={menu.footer}/>
+        </footer>
       </div>
       
     </>
