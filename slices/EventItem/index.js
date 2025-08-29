@@ -30,6 +30,16 @@ const EventItem = ({ slice }) => {
     (a, b) => b.parsedDate - a.parsedDate
   );
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return dateString; // fallback if invalid
+    return date.toLocaleDateString("nl-NL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -49,12 +59,6 @@ const EventItem = ({ slice }) => {
         >
           Verleden
         </div>
-        <div
-          onClick={() => setFilter("alles")}
-          className={`${filter === "alles" ? "active" : ""}`}
-        >
-          Alles
-        </div>
       </div>
       <div className="events-grid">
         {sortedItems.map((item, index) => (
@@ -65,7 +69,7 @@ const EventItem = ({ slice }) => {
             <h3>{item.title}</h3>
             <PrismicNextImage field={item.image} />
             <div className="date-time">
-              <p>{item.date}</p>
+              <p>{formatDate(item.date)}</p>
               <p>{item.time}</p>
             </div>
             <PrismicRichText field={item.description} />

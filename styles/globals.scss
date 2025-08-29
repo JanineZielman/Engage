@@ -299,6 +299,10 @@ h3{
   flex-wrap: wrap;
   .column{
     font-weight: 300;
+    font-size: 18px;
+    li{
+      margin-bottom: 10px;
+    }
     img{
       width: 90%;
       height: auto;
@@ -615,7 +619,7 @@ h3{
       stroke: $purple;
     }
   }
-  .page-content *{
+  .page-content {
     color: $purple;
   }
 }
@@ -669,7 +673,7 @@ h3{
       .date-time{
         margin-bottom: 0;
         p{
-          font-size: 16px;
+          font-size: 18px;
         }
       }
     }
@@ -1009,4 +1013,18 @@ footer{
   .page .page-title.logo-hero svg{
     min-height: 80px;
   }
+}
+
+.programma .page-content .date-time{
+  border-color: $blue!important;
+}
+
+.programma .page-content .afgelopen .date-time{
+  border-color: $purple!important;
+}
+
+.date-time{
+  border-bottom: 1px solid;
+  border-color: inherit!important;
+  margin-bottom: 10px!important;
 }

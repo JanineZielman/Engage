@@ -35,6 +35,16 @@ const Programma = ({ page, navigation, events }) => {
     (a, b) => b.parsedDate - a.parsedDate
   );
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return dateString; // fallback if invalid
+    return date.toLocaleDateString("nl-NL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
   return (
     <div className="page">
       <Layout menu={navigation.results[0].data} page={page}>
@@ -54,12 +64,6 @@ const Programma = ({ page, navigation, events }) => {
             >
               Verleden
             </div>
-            <div
-              onClick={() => setFilter("alles")}
-              className={`${filter === "alles" ? "active" : ""}`}
-            >
-              Alles
-            </div>
           </div>
 
           {/* Events Grid */}
@@ -74,7 +78,7 @@ const Programma = ({ page, navigation, events }) => {
                 <h3>{item.data.title}</h3>
                 <PrismicNextImage field={item.data.image} />
                 <div className="date-time">
-                  <p>{item.data.date}</p>
+                  <p>{formatDate(item.data.date)}</p>
                   <p>{item.data.time}</p>
                 </div>
                 <PrismicRichText field={item.data.description} />

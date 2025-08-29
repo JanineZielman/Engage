@@ -7,7 +7,15 @@ import Link from "next/link";
  */
 
 const NewsItem = ({ slice }) => {
-  console.log(slice)
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return dateString; // fallback if invalid
+    return date.toLocaleDateString("nl-NL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -40,7 +48,7 @@ const NewsItem = ({ slice }) => {
                 <PrismicNextImage field={item.event.data.image} />
                 <h3>{item.event.data.title}</h3>
                 <div className="date-time">
-                  <p>{item.event.data.date}</p>
+                  <p>{formatDate(item.event.data.date)}</p>
                   <p>{item.event.data.time}</p>
                 </div>
                 <PrismicRichText field={item.event.data.description} />
