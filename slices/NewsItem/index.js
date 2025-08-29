@@ -34,6 +34,7 @@ const NewsItem = ({ slice }) => {
         {slice.primary.upcoming.length > 0 &&
           <div className="wrapper">
             <h2>upcoming events</h2>
+            <div className="events">
             {slice.primary.upcoming.map((item) => (
               <div className="event-item">
                 <PrismicNextImage field={item.event.data.image} />
@@ -45,6 +46,7 @@ const NewsItem = ({ slice }) => {
                 <PrismicRichText field={item.event.data.description} />
               </div>
             ))}
+            </div>
           </div>
         }
         {slice.primary.blog.length > 0 &&

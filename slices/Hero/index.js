@@ -23,7 +23,7 @@ const Hero = ({ slice }) => {
       <Logo2/>
       <div className="hero-link">
         <Link
-          href={`/${slice.primary.link.lang}/${slice.primary.link.uid}`}
+          href={`/${slice.primary.link.url}`}
         >
           {slice.primary.link.text}
         </Link>
