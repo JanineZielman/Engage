@@ -663,17 +663,16 @@ h3{
   flex-wrap: wrap;
   padding: 0 2vw 2vw 2vw;
   .news{
-    width: 66.66%;
+    width: 100%;
     display: flex;
   }
   .current{
     width: 100%;
     // flex-direction: column;
-    color: $purple;
+    color: $orange;
     .wrapper{
-      background-color: $orange;
+      // background-color: $orange;
       margin-bottom: 14px;
-      padding: 14px;
     }
     h2{
       font-weight: 300;
@@ -686,7 +685,9 @@ h3{
     .event-item{
       margin-bottom: 24px;
       width: 33%;
-      margin: 14px;
+      margin-right: 14px;
+      background-color: $orange;
+      padding: 14px;
       p, h3{
         color: $purple;
       }
