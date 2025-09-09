@@ -66,10 +66,19 @@
       "long_description": {
         "type": "StructuredText",
         "config": {
-          "label": "Long description",
+          "label": "Long description (Left)",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "paragraph,hyperlink,strong,em,list-item,o-list-item"
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "long_description2": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Long description (Right)",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
         }
       },
       "slices": {

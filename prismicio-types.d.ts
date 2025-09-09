@@ -143,7 +143,7 @@ interface EventDocumentData {
   button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
-   * Long description field in *Event*
+   * Long description (Left) field in *Event*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -152,6 +152,17 @@ interface EventDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   long_description: prismic.RichTextField;
+
+  /**
+   * Long description (Right) field in *Event*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.long_description2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  long_description2: prismic.RichTextField;
 
   /**
    * Slice Zone field in *Event*

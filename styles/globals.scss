@@ -844,8 +844,16 @@ p a{
     }
    
     @media only screen and (min-width: 600px) {
-      p{
-        columns: 2;
+      // p{
+      //   columns: 2;
+      // }
+      .columns{
+        padding: 0;
+        display: flex;
+        .column{
+          width: 49%;
+          justify-content: space-between;
+        }
       }
       .flex{
         display: flex;
