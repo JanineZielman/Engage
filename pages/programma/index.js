@@ -8,7 +8,6 @@ import Link from "next/link";
 
 const Programma = ({ page, navigation, events }) => {
   const [filter, setFilter] = useState("aankomend");
-  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const today = new Date();
 
@@ -68,10 +67,10 @@ const Programma = ({ page, navigation, events }) => {
           {/* Events Grid */}
           <div className="events-grid">
             {sortedItems.map((item, index) => (
-              <div
+              <a
                 className={`event-item ${item.isUpcoming ? "aankomend" : "afgelopen"}`}
                 key={index}
-                onClick={() => setSelectedEvent(item)} // OPEN MODAL
+                href={`programma/${item.uid}`}
                 style={{ cursor: "pointer" }}
               >
                 <h3>{item.data.title}</h3>
@@ -91,52 +90,11 @@ const Programma = ({ page, navigation, events }) => {
                     </Link>
                   </div>
                 }
-              </div>
+              </a>
             ))}
           </div>
         </div>
       </Layout>
-
-      {/* MODAL */}
-      {selectedEvent && (
-        <div className="modal-overlay" onClick={() => setSelectedEvent(null)}>
-          <div
-            className={`modal-content ${selectedEvent.isUpcoming ? "aankomend" : "afgelopen"}`}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-          >
-            <button className="close-btn" onClick={() => setSelectedEvent(null)}>
-              ✕
-            </button>
-            <PrismicNextImage field={selectedEvent.data.image} />
-            <div className="flex">
-              <div className="date-time">
-                <p>{selectedEvent.data.date}</p>
-                <p>{selectedEvent.data.time}</p>
-              </div>
-              {selectedEvent.data.button?.url && (
-                <div className="button">
-                  <Link
-                    target="_blank"
-                    href={`${selectedEvent.data.button.url}`}
-                  >
-                    {selectedEvent.data.button.text}
-                  </Link>
-                </div>
-              )}
-            </div>
-            <h2>{selectedEvent.data.title}</h2>
-            <div className="columns">
-              <div className="column">
-                <PrismicRichText field={selectedEvent.data.long_description} />
-              </div>
-              <div className="column">
-                <PrismicRichText field={selectedEvent.data.long_description2} />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 };
