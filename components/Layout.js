@@ -33,9 +33,9 @@ export const Layout = ({ menu, children, page }) => {
   return (
     <>
       <Head>
-        <title>{`${page.data.meta_title}`}</title>
+        <title>{`${page.data.meta_title ? page.data.meta_title : page.data.title}`}</title>
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={`${page.data.meta_title}`} />
+        <meta property="og:title" content={`${page.data.meta_title ? page.data.meta_title : page.data.title}`} />
         <meta property="og:image" content={page.data.meta_image.url} />
         <meta name="description" content={page.data.meta_description} />
         <meta property="og:description" content={page.data.meta_description} />

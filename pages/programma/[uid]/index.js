@@ -8,6 +8,15 @@ import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 
 const Page = ({ page, navigation }) => {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) return dateString; // fallback if invalid
+    return date.toLocaleDateString("nl-NL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
   return (
     <div className="page event-page">
       <Layout menu={navigation.results[0].data} page={page}>
@@ -16,7 +25,7 @@ const Page = ({ page, navigation }) => {
            <div className="text-wrapper">
             <h2>{page.data.title}</h2>
               <div className="date-time">
-                <p>{page.data.date}</p>
+                 <p>{formatDate(page.data.date)}</p>
                 <p>{page.data.time}</p>
               </div>
             <PrismicRichText field={page.data.description} />
