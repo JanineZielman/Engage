@@ -48,7 +48,7 @@ const NewsItem = ({ slice }) => {
                 <PrismicNextImage field={item.event.data.image} />
                 <h3>{item.event.data.title}</h3>
                 <div className="date-time">
-                  <p>{formatDate(item.event.data.date)}</p>
+                  <p>{item.event.data.dates ? item.event.data.dates : formatDate(item.event.data.date)}</p>
                   <p>{item.event.data.time}</p>
                 </div>
                 <PrismicRichText field={item.event.data.description} />
