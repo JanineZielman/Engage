@@ -41,7 +41,7 @@ const Page = ({ page, navigation }) => {
               )}
           </div>
         </div>
-        <div className="columns">
+        <div className={`columns ${page.data.long_description2.length > 0 ? 'amount-2': 'amount-1'}`}>
           <div className="column">
             <PrismicRichText field={page.data.long_description} />
           </div>
