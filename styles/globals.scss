@@ -572,22 +572,23 @@ h3{
     padding: 10px 24px;
     background-color: $orange;
     color: $purple;
-    font-size: 24px;
+    font-size: 22px;
     margin-right: 48px;
     font-weight: 500;
-    font-size: 30px;
   }
 }
 
 .button a{
   margin-bottom: 24px;
-  padding: 5px 10px;
+  padding: 5px 20px;
   background-color: $orange;
   color: $purple;
   margin-top: 24px;
   font-weight: 500;
+  font-size: 22px;
   display: block;
   text-align: center;
+  width: fit-content;
   &:hover{
     background-color: $blue;
   }
@@ -675,6 +676,9 @@ h3{
     width: 100%;
     // flex-direction: column;
     color: $orange;
+    .date-time{
+      border-color: $purple;
+    }
     .wrapper{
       // background-color: $orange;
       margin-bottom: 14px;
@@ -727,6 +731,10 @@ h3{
   }
 }
 
+.news-grid .current .event-item:hover{
+  background-color: $blue;
+}
+
 .aankomend{
   background-color: $purple;
   color: $blue;
@@ -754,6 +762,16 @@ h3{
     background-color: $purple;
     padding: 14px 14px 24px 14px;
     margin-bottom: 1.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .buttons{
+      margin-top: 24px;
+      padding: 0;
+      a{
+        margin-bottom: 10px;
+      }
+    }
     &.afgelopen{
       background-color: $orange;
       p, h3{
@@ -844,6 +862,16 @@ p a{
       font-weight: 300;
       margin: 0;
       color: $blue;
+    }
+
+    .buttons{
+      // display: block;
+      margin-top: 48px;
+      padding: 0;
+      a{
+        margin-bottom: 14px;
+        font-size: 22px;
+      }
     }
 
     .date-time{
@@ -1158,6 +1186,6 @@ footer{
 
 .date-time{
   border-bottom: 1px solid;
-  border-color: inherit!important;
+  border-color: inherit;
   margin-bottom: 10px!important;
 }

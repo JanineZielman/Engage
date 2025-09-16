@@ -1,7 +1,7 @@
-// import { SliceZone } from "@prismicio/react";
+import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "../../../prismicio";
-// import { components } from "../slices";
+import { components } from "../../../slices";
 import { Layout } from "../../../components/Layout";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
@@ -25,11 +25,11 @@ const Page = ({ page, navigation }) => {
            <div className="text-wrapper">
             <h2>{page.data.title}</h2>
               <div className="date-time">
-                 <p>{formatDate(page.data.date)}</p>
+                 <p>{page.data.dates ? page.data.dates : formatDate(page.data.date)}</p>
                 <p>{page.data.time}</p>
               </div>
             <PrismicRichText field={page.data.description} />
-             {page.data.button?.url && (
+             {/* {page.data.button?.url && (
                 <div className="button">
                   <Link
                     target="_blank"
@@ -38,7 +38,8 @@ const Page = ({ page, navigation }) => {
                     {page.data.button.text}
                   </Link>
                 </div>
-              )}
+              )} */}
+              <SliceZone slices={page.data.slices} components={components} />
           </div>
         </div>
         <div className={`columns ${page.data.long_description2.length > 0 ? 'amount-2': 'amount-1'}`}>
@@ -49,7 +50,6 @@ const Page = ({ page, navigation }) => {
             <PrismicRichText field={page.data.long_description2} />
           </div>
         </div>
-        {/* <SliceZone slices={page.data.slices} components={components} /> */}
       </Layout>
     </div>
   );

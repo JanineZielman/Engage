@@ -29,10 +29,17 @@
           "thumbnails": []
         }
       },
+      "dates": {
+        "type": "Text",
+        "config": {
+          "label": "Date(s)",
+          "placeholder": ""
+        }
+      },
       "date": {
         "type": "Date",
         "config": {
-          "label": "Date",
+          "label": "Date (for order)",
           "placeholder": ""
         }
       },
@@ -50,6 +57,29 @@
           "placeholder": "",
           "allowTargetBlank": true,
           "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
+        }
+      },
+      "filter": {
+        "type": "Group",
+        "config": {
+          "label": "Filter",
+          "repeat": true,
+          "fields": {
+            "filter": {
+              "type": "Text",
+              "config": {
+                "label": "Filter",
+                "placeholder": ""
+              }
+            },
+            "color": {
+              "type": "Color",
+              "config": {
+                "label": "Color",
+                "placeholder": ""
+              }
+            }
+          }
         }
       },
       "button": {
@@ -85,7 +115,11 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "buttons": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

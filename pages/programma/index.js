@@ -2,11 +2,11 @@ import { createClient } from "../../prismicio";
 import { Layout } from "../../components/Layout";
 import Logo3 from "../../components/logo3";
 import { useState } from "react";
-import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
-import Link from "next/link";
 
 const Programma = ({ page, navigation, events }) => {
+  console.log(events)
   const [filter, setFilter] = useState("aankomend");
 
   const today = new Date();
@@ -73,23 +73,27 @@ const Programma = ({ page, navigation, events }) => {
                 href={`programma/${item.uid}`}
                 style={{ cursor: "pointer" }}
               >
-                <h3>{item.data.title}</h3>
-                <PrismicNextImage field={item.data.image} />
-                <div className="date-time">
-                  <p>{formatDate(item.data.date)}</p>
-                  <p>{item.data.time}</p>
-                </div>
-                <PrismicRichText field={item.data.description} />
-                {item.data.button.url &&
-                  <div className="button">
-                    <Link
-                      target="_blank"
-                      href={`${item.data.button.url}`}
-                    >
-                      {item.data.button.text}
-                    </Link>
+                <div>
+                  <h3>{item.data.title}</h3>
+                  <PrismicNextImage field={item.data.image} />
+                  <div className="date-time">
+                    <p>{item.data.dates ? item.data.dates : formatDate(item.data.date)}</p>
+                    <p>{item.data.time}</p>
                   </div>
-                }
+                  <PrismicRichText field={item.data.description} />
+                </div>
+                <div
+                  className="buttons"
+                >
+                  {item.data.slices[0]?.primary.button.map((link) => (
+                    <PrismicNextLink
+                      key={link.key}
+                      field={link}
+                    >
+                      {link.text}
+                    </PrismicNextLink>
+                  ))}
+                </div>
               </a>
             ))}
           </div>
