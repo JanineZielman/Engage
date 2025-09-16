@@ -179,17 +179,6 @@ interface EventDocumentData {
   filter: prismic.GroupField<Simplify<EventDocumentDataFilterItem>>;
 
   /**
-   * Button field in *Event*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: event.button
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
    * Long description (Left) field in *Event*
    *
    * - **Field Type**: Rich Text

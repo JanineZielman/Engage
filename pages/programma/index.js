@@ -6,11 +6,11 @@ import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 
 const Programma = ({ page, navigation, events }) => {
-  console.log(events)
   const [filter, setFilter] = useState("aankomend");
 
   const today = new Date();
 
+  // Parse event dates
   const itemsWithParsedDates = events
     .map((item) => {
       const date = new Date(item.data.date);
@@ -22,17 +22,34 @@ const Programma = ({ page, navigation, events }) => {
     })
     .filter((item) => item.parsedDate);
 
+  // Collect unique custom filters from Prismic
+  const allFilters = Array.from(
+    new Set(
+      events.flatMap((event) =>
+        event.data.filter?.map((f) => f.filter) || []
+      )
+    )
+  );
+
+  // Filtering logic
   const filteredItems = itemsWithParsedDates.filter((item) => {
-    if (filter === "alles") return true;
     if (filter === "aankomend") return item.isUpcoming;
     if (filter === "afgelopen") return !item.isUpcoming;
+
+    // Custom filters from Prismic
+    if (allFilters.includes(filter)) {
+      return item.data.filter?.some((f) => f.filter === filter);
+    }
+
     return true;
   });
 
+  // Sort by date (newest first)
   const sortedItems = filteredItems.sort(
     (a, b) => b.parsedDate - a.parsedDate
   );
 
+  // Date formatting helper
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     if (isNaN(date)) return dateString; // fallback if invalid
@@ -50,6 +67,7 @@ const Programma = ({ page, navigation, events }) => {
         <div className="events">
           {/* Filter buttons */}
           <div className="filter-buttons">
+            {/* Static filters */}
             <div
               onClick={() => setFilter("aankomend")}
               className={`${filter === "aankomend" ? "active" : ""}`}
@@ -62,40 +80,62 @@ const Programma = ({ page, navigation, events }) => {
             >
               Verleden
             </div>
+
+            {/* Dynamic filters from Prismic */}
+            {allFilters.map((f) => (
+              <div
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`${filter === f ? "active" : ""}`}
+              >
+                {f}
+              </div>
+            ))}
           </div>
 
           {/* Events Grid */}
           <div className="events-grid">
-            {sortedItems.map((item, index) => (
-              <a
-                className={`event-item ${item.isUpcoming ? "aankomend" : "afgelopen"}`}
-                key={index}
-                href={`programma/${item.uid}`}
-                style={{ cursor: "pointer" }}
-              >
-                <div>
-                  <h3>{item.data.title}</h3>
-                  <PrismicNextImage field={item.data.image} />
-                  <div className="date-time">
-                    <p>{item.data.dates ? item.data.dates : formatDate(item.data.date)}</p>
-                    <p>{item.data.time}</p>
-                  </div>
-                  <PrismicRichText field={item.data.description} />
-                </div>
-                <div
-                  className="buttons"
+            {sortedItems.map((item, index) => {
+              // Grab the first filter with a color for styling
+              const primaryFilter = item.data.filter?.[0];
+              const backgroundColor = primaryFilter?.color || "";
+
+              return (
+                <a
+                  className={`event-item ${
+                    item.isUpcoming ? "aankomend" : "afgelopen"
+                  }`}
+                  key={index}
+                  href={`programma/${item.uid}`}
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: backgroundColor,
+                    color: backgroundColor ? '#6C2537' : '#C4CED5'
+                  }}
                 >
-                  {item.data.slices[0]?.primary.button.map((link) => (
-                    <PrismicNextLink
-                      key={link.key}
-                      field={link}
-                    >
-                      {link.text}
-                    </PrismicNextLink>
-                  ))}
-                </div>
-              </a>
-            ))}
+                  <div>
+                    <h3>{item.data.title}</h3>
+                    <PrismicNextImage field={item.data.image} />
+                    <div className="date-time" style={{borderColor: backgroundColor ? '#6C2537' : '#C4CED5'}}>
+                      <p>
+                        {item.data.dates
+                          ? item.data.dates
+                          : formatDate(item.data.date)}
+                      </p>
+                      <p>{item.data.time}</p>
+                    </div>
+                    <PrismicRichText field={item.data.description} />
+                  </div>
+                  <div className="buttons">
+                    {item.data.slices[0]?.primary.button.map((link) => (
+                      <PrismicNextLink key={link.key} field={link}>
+                        {link.text}
+                      </PrismicNextLink>
+                    ))}
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </Layout>
