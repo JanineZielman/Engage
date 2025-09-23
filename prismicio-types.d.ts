@@ -113,6 +113,17 @@ interface EventDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Preview Image field in *Event*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.preview_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  preview_image: prismic.ImageField<never>;
+
+  /**
    * Image field in *Event*
    *
    * - **Field Type**: Image
@@ -155,6 +166,17 @@ interface EventDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   time: prismic.KeyTextField;
+
+  /**
+   * Intro field in *Event*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.intro
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  intro: prismic.RichTextField;
 
   /**
    * Description field in *Event*
@@ -383,6 +405,23 @@ interface NavigationDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   footer: prismic.RichTextField;
+
+  /**
+   * Ticket Link field in *Navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.ticket_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  ticket_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 }
 
 /**
@@ -811,7 +850,17 @@ export interface NewsItemSliceDefaultPrimaryUpcomingItem {
     [
       {
         id: "event";
-        fields: ["title", "image", "date", "time", "description", "button"];
+        fields: [
+          "title",
+          "image",
+          "date",
+          "time",
+          "description",
+          "intro",
+          "dates",
+          { id: "filter"; fields: ["filter", "color"] },
+          "preview_image",
+        ];
       },
     ]
   >;

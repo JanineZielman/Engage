@@ -19,6 +19,17 @@
           "placeholder": ""
         }
       },
+      "preview_image": {
+        "type": "Image",
+        "config": {
+          "label": "Preview Image",
+          "constraint": {
+            "width": 1080,
+            "height": 1080
+          },
+          "thumbnails": []
+        }
+      },
       "image": {
         "type": "Image",
         "config": {
@@ -48,6 +59,15 @@
         "config": {
           "label": "Time",
           "placeholder": ""
+        }
+      },
+      "intro": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Intro",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
         }
       },
       "description": {

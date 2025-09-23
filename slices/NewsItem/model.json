@@ -79,7 +79,16 @@
                         "date",
                         "time",
                         "description",
-                        "button"
+                        "intro",
+                        "dates",
+                        {
+                          "id": "filter",
+                          "fields": [
+                            "filter",
+                            "color"
+                          ]
+                        },
+                        "preview_image"
                       ]
                     }
                   ]

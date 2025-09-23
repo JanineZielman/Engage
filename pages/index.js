@@ -12,7 +12,7 @@ const Index = ({ home, navigation, about}) => {
         <SliceZone slices={home.data.slices} components={components} />
         {about?.data.slices &&
           <div className="page" id="about">
-            <Logo3 logo={about.data.title_svg}/>
+            <Logo3 logo={about.data} navigation={navigation}/>
             <SliceZone slices={about.data.slices} components={components} />
           </div>
         }

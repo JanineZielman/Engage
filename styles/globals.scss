@@ -283,12 +283,21 @@ h3{
 .page .page-title.logo-hero{
   width: 100%;
   max-width: 100%;
+  position: relative;
   svg{
-    width: 90vw;
+    // width: 90vw;
     min-height: 180px;
+    max-height: 200px;
     margin-left: 3%;
     max-width: 900px;
     margin-top: 24px;
+  }
+}
+
+#about .page-title.logo-hero{
+  svg{
+    width: 90vw;
+    max-height: 100%;
   }
 }
 
@@ -562,6 +571,14 @@ h3{
   }
 }
 
+.ticket{
+  position: absolute;
+  width: 200px;
+  height: auto;
+  right: 24px;
+  top: 100px;
+}
+
 .buttons{
   display: flex;
   flex-wrap: wrap;
@@ -575,6 +592,9 @@ h3{
     font-size: 22px;
     margin-right: 48px;
     font-weight: 500;
+    &:hover{
+      background-color: $blue;
+    }
   }
 }
 
@@ -665,6 +685,7 @@ h3{
 }
 
 .news-grid{
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   padding: 0 2vw 2vw 2vw;
@@ -851,9 +872,8 @@ p a{
     }
     img{
       width: 100%;
-      height: auto;
+      height: 100%;
       margin-top: 24px;
-      object-fit: cover;
       object-position: top;
     }
     h3{

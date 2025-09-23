@@ -5,7 +5,6 @@ import { components } from "../../../slices";
 import { Layout } from "../../../components/Layout";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
-import Link from "next/link";
 
 const Page = ({ page, navigation }) => {
   const formatDate = (dateString) => {
@@ -25,21 +24,11 @@ const Page = ({ page, navigation }) => {
            <div className="text-wrapper">
             <h2>{page.data.title}</h2>
               <div className="date-time">
-                 <p>{page.data.dates ? page.data.dates : formatDate(page.data.date)}</p>
+                <p>{page.data.dates ? page.data.dates : formatDate(page.data.date)}</p>
                 <p>{page.data.time}</p>
               </div>
             <PrismicRichText field={page.data.description} />
-             {/* {page.data.button?.url && (
-                <div className="button">
-                  <Link
-                    target="_blank"
-                    href={`${page.data.button.url}`}
-                  >
-                    {page.data.button.text}
-                  </Link>
-                </div>
-              )} */}
-              <SliceZone slices={page.data.slices} components={components} />
+            <SliceZone slices={page.data.slices} components={components} />
           </div>
         </div>
         <div className={`columns ${page.data.long_description2.length > 0 ? 'amount-2': 'amount-1'}`}>

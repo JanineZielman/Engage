@@ -11,7 +11,7 @@ const Page = ({ page, navigation }) => {
     <div className="page">
       <Layout menu={navigation.results[0].data} page={page}>
         {page.data.title_svg ?
-          <Logo3 logo={page.data.title_svg}/>
+          <Logo3 logo={page.data} navigation={navigation}/>
           :
           <Logo2/>
         }

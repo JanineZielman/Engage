@@ -82,8 +82,8 @@
 							[
 								"event",
 								{
-									"key": "31ef2241-3c9c-41d0-9dd1-24b4e330efa2",
 									"__TYPE__": "LinkContent",
+									"key": "d25afe41-800e-46a1-b4a3-8d687d74e293",
 									"value": {
 										"__TYPE__": "DocumentLink",
 										"id": "mock_document_id"

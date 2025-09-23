@@ -164,6 +164,7 @@ export const Layout = ({ menu, children, page }) => {
           </div>
         </div>
 
+
         {/* Page Content */}
         <div className={`page-content`}>{children}</div>
         <footer>

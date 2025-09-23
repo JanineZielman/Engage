@@ -45,6 +45,17 @@
           "allowTargetBlank": true,
           "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item,image"
         }
+      },
+      "ticket_link": {
+        "type": "Link",
+        "config": {
+          "label": "Ticket Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": false,
+          "repeat": false
+        }
       }
     }
   }

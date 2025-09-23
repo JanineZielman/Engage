@@ -2,8 +2,9 @@ import { createClient } from "../../prismicio";
 import { Layout } from "../../components/Layout";
 import Logo3 from "../../components/logo3";
 import { useState } from "react";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
+import Link from "next/link";
 
 const Programma = ({ page, navigation, events }) => {
   const [filter, setFilter] = useState("aankomend");
@@ -63,7 +64,7 @@ const Programma = ({ page, navigation, events }) => {
   return (
     <div className="page">
       <Layout menu={navigation.results[0].data} page={page}>
-        <Logo3 logo={page.data.title_svg} />
+        <Logo3 logo={page.data} navigation={navigation} />
         <div className="events">
           {/* Filter buttons */}
           <div className="filter-buttons">
@@ -115,7 +116,7 @@ const Programma = ({ page, navigation, events }) => {
                 >
                   <div>
                     <h3>{item.data.title}</h3>
-                    <PrismicNextImage field={item.data.image} />
+                    <PrismicNextImage field={item.data.preview_image?.url ? item.data.preview_image : item.data.image} />
                     <div className="date-time" style={{borderColor: backgroundColor ? '#6C2537' : '#C4CED5'}}>
                       <p>
                         {item.data.dates
@@ -124,14 +125,12 @@ const Programma = ({ page, navigation, events }) => {
                       </p>
                       <p>{item.data.time}</p>
                     </div>
-                    <PrismicRichText field={item.data.description} />
+                    <PrismicRichText field={item.data.intro?.length ? item.data.intro : item.data.description} />
                   </div>
                   <div className="buttons">
-                    {item.data.slices[0]?.primary.button.map((link) => (
-                      <PrismicNextLink key={link.key} field={link}>
-                        {link.text}
-                      </PrismicNextLink>
-                    ))}
+                    <Link href={`programma/${item.uid}`}>
+                      {page.lang == 'en-us' ? 'Read more' : 'Lees meer'}
+                    </Link>
                   </div>
                 </a>
               );

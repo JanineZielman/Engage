@@ -1,8 +1,9 @@
 'use client'
 
+import { PrismicNextLink } from '@prismicio/next';
 import { useEffect, useRef, useState } from 'react';
 
-const Logo3 = ({ logo }) => {
+const Logo3 = ({ logo, navigation }) => {
   const containerRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -75,7 +76,20 @@ const Logo3 = ({ logo }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div dangerouslySetInnerHTML={{ __html: logo }} />
+      <div dangerouslySetInnerHTML={{ __html: logo.title_svg }} />
+      {navigation.results[0].lang == 'en-us' ?
+        <div className="ticket">
+          <PrismicNextLink href={navigation.results[0].data.ticket_link}>
+            <img src="/ticket-en.svg"/>
+          </PrismicNextLink>
+        </div>
+      :
+        <div className="ticket">
+          <PrismicNextLink href={navigation.results[0].data.ticket_link}>
+            <img src="/ticket.svg"/>
+          </PrismicNextLink>
+        </div>
+      }  
     </div>
   );
 };
