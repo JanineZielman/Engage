@@ -1,6 +1,4 @@
 'use client'
-
-import { PrismicNextLink } from '@prismicio/next';
 import { useEffect, useRef, useState } from 'react';
 
 const Logo3 = ({ logo, navigation }) => {
@@ -79,15 +77,15 @@ const Logo3 = ({ logo, navigation }) => {
       <div dangerouslySetInnerHTML={{ __html: logo.title_svg }} />
       {navigation.results[0].lang == 'en-us' ?
         <div className="ticket">
-          <PrismicNextLink href={navigation.results[0].data.ticket_link}>
+          <a target="_blank" href={navigation.results[0].data.ticket_link.url}>
             <img src="/ticket-en.svg"/>
-          </PrismicNextLink>
+          </a>
         </div>
       :
         <div className="ticket">
-          <PrismicNextLink href={navigation.results[0].data.ticket_link}>
+          <a target="_blank" href={navigation.results[0].data.ticket_link.url}>
             <img src="/ticket.svg"/>
-          </PrismicNextLink>
+          </a>
         </div>
       }  
     </div>
