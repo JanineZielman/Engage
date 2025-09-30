@@ -24,13 +24,13 @@ const Programma = ({ page, navigation, events }) => {
     .filter((item) => item.parsedDate);
 
   // Collect unique custom filters from Prismic
-  const allFilters = Array.from(
-    new Set(
-      events.flatMap((event) =>
-        event.data.filter?.map((f) => f.filter) || []
-      )
-    )
-  );
+  // const allFilters = Array.from(
+  //   new Set(
+  //     events.flatMap((event) =>
+  //       event.data.filter?.map((f) => f.filter) || []
+  //     )
+  //   )
+  // );
 
   // Filtering logic
   const filteredItems = itemsWithParsedDates.filter((item) => {
@@ -38,16 +38,16 @@ const Programma = ({ page, navigation, events }) => {
     if (filter === "afgelopen") return !item.isUpcoming;
 
     // Custom filters from Prismic
-    if (allFilters.includes(filter)) {
-      return item.data.filter?.some((f) => f.filter === filter);
-    }
+    // if (allFilters.includes(filter)) {
+    //   return item.data.filter?.some((f) => f.filter === filter);
+    // }
 
     return true;
   });
 
   // Sort by date (newest first)
   const sortedItems = filteredItems.sort(
-    (a, b) => b.parsedDate - a.parsedDate
+    (a, b) => a.parsedDate - b.parsedDate
   );
 
   // Date formatting helper
@@ -83,7 +83,7 @@ const Programma = ({ page, navigation, events }) => {
             </div>
 
             {/* Dynamic filters from Prismic */}
-            {allFilters.map((f) => (
+            {/* {allFilters.map((f) => (
               <div
                 key={f}
                 onClick={() => setFilter(f)}
@@ -91,7 +91,7 @@ const Programma = ({ page, navigation, events }) => {
               >
                 {f}
               </div>
-            ))}
+            ))} */}
           </div>
 
           {/* Events Grid */}
