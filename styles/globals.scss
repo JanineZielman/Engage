@@ -650,7 +650,7 @@ h3{
   }
 }
 
-.programma{
+.programma, .pitchers{
   background-color: $blue;
   .menu{
     background-color: $blue;
@@ -1207,6 +1207,15 @@ footer{
   .page .page-title.logo-hero svg{
     min-height: 80px;
   }
+  .ticket{
+    width: 150px;
+    top: -14px;
+    left: -14px;
+  }
+  #about .page-title.logo-hero svg{
+    width: 90vw;
+    margin-top: 50px;
+  }
 }
 
 .programma .page-content .date-time{
@@ -1222,3 +1231,4 @@ footer{
   border-color: inherit;
   margin-bottom: 10px!important;
 }
+

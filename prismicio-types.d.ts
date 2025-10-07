@@ -548,6 +548,91 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
+type PitchersDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Pitchers documents
+ */
+interface PitchersDocumentData {
+  /**
+   * Title field in *Pitchers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pitchers.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Pitchers*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pitchers.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<PitchersDocumentDataSlicesSlice> /**
+   * Meta Title field in *Pitchers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: pitchers.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Pitchers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: pitchers.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Pitchers*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pitchers.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never> /**
+   * Title SVG field in *Pitchers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pitchers.title_svg
+   * - **Tab**: Title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  title_svg: prismic.KeyTextField;
+}
+
+/**
+ * Pitchers document from Prismic
+ *
+ * - **API ID**: `pitchers`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PitchersDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<PitchersDocumentData>,
+    "pitchers",
+    Lang
+  >;
+
 type ProgrammaDocumentDataSlicesSlice = never;
 
 /**
@@ -638,6 +723,7 @@ export type AllDocumentTypes =
   | HomepageDocument
   | NavigationDocument
   | PageDocument
+  | PitchersDocument
   | ProgrammaDocument;
 
 /**
@@ -1179,6 +1265,9 @@ declare module "@prismicio/client" {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      PitchersDocument,
+      PitchersDocumentData,
+      PitchersDocumentDataSlicesSlice,
       ProgrammaDocument,
       ProgrammaDocumentData,
       ProgrammaDocumentDataSlicesSlice,
