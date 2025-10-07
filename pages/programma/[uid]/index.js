@@ -23,6 +23,7 @@ const Page = ({ page, navigation }) => {
            <PrismicNextImage field={page.data.image} />
            <div className="text-wrapper">
             <h2>{page.data.title}</h2>
+            <h3>{page.data.subtitle}</h3>
               <div className="date-time">
                 <p>{page.data.dates ? page.data.dates : formatDate(page.data.date)}</p>
                 <p>{page.data.time}</p>

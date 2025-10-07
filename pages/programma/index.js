@@ -131,6 +131,7 @@ const Programma = ({ page, navigation, events }) => {
                 >
                   <div>
                     <h3>{item.data.title}</h3>
+                    <h4>{item.data.subtitle}</h4>
                     <PrismicNextImage
                       field={
                         item.data.preview_image?.url

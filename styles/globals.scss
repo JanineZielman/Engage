@@ -833,6 +833,12 @@ h3{
   font-size: 18px;
 }
 
+h4{
+  font-size: 20px;
+  margin-top: -10px;
+  font-weight: 300;
+}
+
 .event-item{
   img{
     width: 100%;
@@ -879,6 +885,7 @@ p a{
     h3{
       color: $blue;
       margin: 0 0 14px 0;
+      font-weight: 300;
     }
     h2{
       color: $blue;

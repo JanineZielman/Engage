@@ -123,6 +123,17 @@ interface EventDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Subtitle field in *Event*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
    * Preview Image field in *Event*
    *
    * - **Field Type**: Image
