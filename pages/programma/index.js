@@ -116,6 +116,8 @@ const Programma = ({ page, navigation, events }) => {
               const primaryFilter = item.data.filter?.[0];
               const backgroundColor = primaryFilter?.color || "";
 
+              console.log(backgroundColor)
+
               return (
                 <a
                   className={`event-item ${
@@ -126,7 +128,7 @@ const Programma = ({ page, navigation, events }) => {
                   style={{
                     cursor: "pointer",
                     backgroundColor: backgroundColor,
-                    color: backgroundColor ? "#6C2537" : "#C4CED5",
+                    color: backgroundColor ? (backgroundColor == ("#3E2602" || "#6C2537") ? "#C4CED5" : "#6C2537") : "#C4CED5",
                   }}
                 >
                   <div>
@@ -142,9 +144,7 @@ const Programma = ({ page, navigation, events }) => {
                     <div
                       className="date-time"
                       style={{
-                        borderColor: backgroundColor
-                          ? "#6C2537"
-                          : "#C4CED5",
+                        borderColor: backgroundColor ? (backgroundColor == ("#3E2602" || "#6C2537") ? "#C4CED5" : "#6C2537") : "#C4CED5",
                       }}
                     >
                       <p>
