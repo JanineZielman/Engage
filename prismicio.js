@@ -28,6 +28,9 @@ export const linkResolver = (doc) => {
   if (doc.type === "programma") {
     return `/${doc.lang}/programma`;
   }
+  if (doc.type === "pitchers") {
+    return `/${doc.lang}/pitchers`;
+  }
   return `/${doc.lang}`;
 };
 
