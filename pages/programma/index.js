@@ -10,8 +10,16 @@ const Programma = ({ page, navigation, events }) => {
   const [filter, setFilter] = useState("aankomend");
   const today = new Date();
 
+  // --- 1️⃣ Exclude events where any filter includes "pitch" ---
+  const nonPitchEvents = events.filter(
+    (event) =>
+      !event.data.filter?.some((f) =>
+        f.filter?.toLowerCase().includes("pitch")
+      )
+  );
+
   // Parse event dates
-  const itemsWithParsedDates = events
+  const itemsWithParsedDates = nonPitchEvents
     .map((item) => {
       const date = new Date(item.data.date);
       return {
@@ -22,14 +30,15 @@ const Programma = ({ page, navigation, events }) => {
     })
     .filter((item) => item.parsedDate);
 
-  // --- GROUP FILTER LOGIC (only include filters with a group) ---
+  // --- 2️⃣ GROUP FILTER LOGIC (only include filters with a group) ---
   const groupedFilters = {};
 
-  events.forEach((event) => {
+  nonPitchEvents.forEach((event) => {
     event.data.filter?.forEach((f) => {
       const group = f.group?.trim();
       const filterName = f.filter?.trim();
       if (!filterName || !group) return; // skip if no group or filter name
+      if (filterName.toLowerCase().includes("pitch")) return; // skip "pitch" filters entirely
 
       if (!groupedFilters[group]) groupedFilters[group] = new Set();
       groupedFilters[group].add(filterName);
@@ -41,7 +50,7 @@ const Programma = ({ page, navigation, events }) => {
     .flatMap((set) => [...set])
     .filter(Boolean);
 
-  // Filtering logic
+  // --- 3️⃣ Filtering logic ---
   const filteredItems = itemsWithParsedDates.filter((item) => {
     if (filter === "aankomend") return item.isUpcoming;
     if (filter === "afgelopen") return !item.isUpcoming;
@@ -54,10 +63,10 @@ const Programma = ({ page, navigation, events }) => {
     return true;
   });
 
-  // Sort by date (newest first)
+  // --- 4️⃣ Sort by date (newest first) ---
   const sortedItems = filteredItems.sort((a, b) => a.parsedDate - b.parsedDate);
 
-  // Date formatting helper
+  // --- 5️⃣ Date formatting helper ---
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     if (isNaN(date)) return dateString;
@@ -68,10 +77,12 @@ const Programma = ({ page, navigation, events }) => {
     });
   };
 
+  // --- 6️⃣ JSX ---
   return (
     <div className="page">
       <Layout menu={navigation.results[0].data} page={page}>
         <Logo3 logo={page.data} navigation={navigation} />
+
         <div className="events">
           {/* FILTER BUTTONS */}
           <div className="filter-buttons">
@@ -89,7 +100,7 @@ const Programma = ({ page, navigation, events }) => {
               Verleden
             </div>
 
-            {/* Grouped filters (dropdowns only, ungrouped filters hidden) */}
+            {/* Grouped filters */}
             {Object.entries(groupedFilters).map(([group, filters]) => (
               <div key={group} className="filter-group">
                 <details>
@@ -126,7 +137,11 @@ const Programma = ({ page, navigation, events }) => {
                   style={{
                     cursor: "pointer",
                     backgroundColor: backgroundColor,
-                    color: backgroundColor ? (backgroundColor == ("#3E2602" || "#6C2537") ? "#C4CED5" : "#6C2537") : "#C4CED5",
+                    color: backgroundColor
+                      ? backgroundColor === "#3E2602" || backgroundColor === "#6C2537"
+                        ? "#C4CED5"
+                        : "#6C2537"
+                      : "#C4CED5",
                   }}
                 >
                   <div>
@@ -142,7 +157,11 @@ const Programma = ({ page, navigation, events }) => {
                     <div
                       className="date-time"
                       style={{
-                        borderColor: backgroundColor ? (backgroundColor == ("#3E2602" || "#6C2537") ? "#C4CED5" : "#6C2537") : "#C4CED5",
+                        borderColor: backgroundColor
+                          ? backgroundColor === "#3E2602" || backgroundColor === "#6C2537"
+                            ? "#C4CED5"
+                            : "#6C2537"
+                          : "#C4CED5",
                       }}
                     >
                       <p>
