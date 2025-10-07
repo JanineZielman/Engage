@@ -85,6 +85,13 @@
           "label": "Filter",
           "repeat": true,
           "fields": {
+            "group": {
+              "type": "Text",
+              "config": {
+                "label": "Group",
+                "placeholder": ""
+              }
+            },
             "filter": {
               "type": "Text",
               "config": {

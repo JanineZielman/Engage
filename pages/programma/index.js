@@ -8,7 +8,6 @@ import Link from "next/link";
 
 const Programma = ({ page, navigation, events }) => {
   const [filter, setFilter] = useState("aankomend");
-
   const today = new Date();
 
   // Parse event dates
@@ -23,14 +22,24 @@ const Programma = ({ page, navigation, events }) => {
     })
     .filter((item) => item.parsedDate);
 
-  // Collect unique custom filters from Prismic
-  // const allFilters = Array.from(
-  //   new Set(
-  //     events.flatMap((event) =>
-  //       event.data.filter?.map((f) => f.filter) || []
-  //     )
-  //   )
-  // );
+  // --- GROUP FILTER LOGIC (only include filters with a group) ---
+  const groupedFilters = {};
+
+  events.forEach((event) => {
+    event.data.filter?.forEach((f) => {
+      const group = f.group?.trim();
+      const filterName = f.filter?.trim();
+      if (!filterName || !group) return; // skip if no group or filter name
+
+      if (!groupedFilters[group]) groupedFilters[group] = new Set();
+      groupedFilters[group].add(filterName);
+    });
+  });
+
+  // Flatten all filters for filtering logic
+  const allFilters = Object.values(groupedFilters)
+    .flatMap((set) => [...set])
+    .filter(Boolean);
 
   // Filtering logic
   const filteredItems = itemsWithParsedDates.filter((item) => {
@@ -38,22 +47,20 @@ const Programma = ({ page, navigation, events }) => {
     if (filter === "afgelopen") return !item.isUpcoming;
 
     // Custom filters from Prismic
-    // if (allFilters.includes(filter)) {
-    //   return item.data.filter?.some((f) => f.filter === filter);
-    // }
+    if (allFilters.includes(filter)) {
+      return item.data.filter?.some((f) => f.filter === filter);
+    }
 
     return true;
   });
 
   // Sort by date (newest first)
-  const sortedItems = filteredItems.sort(
-    (a, b) => a.parsedDate - b.parsedDate
-  );
+  const sortedItems = filteredItems.sort((a, b) => a.parsedDate - b.parsedDate);
 
   // Date formatting helper
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    if (isNaN(date)) return dateString; // fallback if invalid
+    if (isNaN(date)) return dateString;
     return date.toLocaleDateString("nl-NL", {
       day: "2-digit",
       month: "2-digit",
@@ -66,7 +73,7 @@ const Programma = ({ page, navigation, events }) => {
       <Layout menu={navigation.results[0].data} page={page}>
         <Logo3 logo={page.data} navigation={navigation} />
         <div className="events">
-          {/* Filter buttons */}
+          {/* FILTER BUTTONS */}
           <div className="filter-buttons">
             {/* Static filters */}
             <div
@@ -82,22 +89,30 @@ const Programma = ({ page, navigation, events }) => {
               Verleden
             </div>
 
-            {/* Dynamic filters from Prismic */}
-            {/* {allFilters.map((f) => (
-              <div
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`${filter === f ? "active" : ""}`}
-              >
-                {f}
+            {/* Grouped filters (dropdowns only, ungrouped filters hidden) */}
+            {Object.entries(groupedFilters).map(([group, filters]) => (
+              <div key={group} className="filter-group">
+                <details>
+                  <summary>{group}</summary>
+                  <div className="dropdown-content">
+                    {[...filters].map((f) => (
+                      <div
+                        key={f}
+                        onClick={() => setFilter(f)}
+                        className={`${filter === f ? "active" : ""}`}
+                      >
+                        {f}
+                      </div>
+                    ))}
+                  </div>
+                </details>
               </div>
-            ))} */}
+            ))}
           </div>
 
-          {/* Events Grid */}
+          {/* EVENTS GRID */}
           <div className="events-grid">
             {sortedItems.map((item, index) => {
-              // Grab the first filter with a color for styling
               const primaryFilter = item.data.filter?.[0];
               const backgroundColor = primaryFilter?.color || "";
 
@@ -111,13 +126,26 @@ const Programma = ({ page, navigation, events }) => {
                   style={{
                     cursor: "pointer",
                     backgroundColor: backgroundColor,
-                    color: backgroundColor ? '#6C2537' : '#C4CED5'
+                    color: backgroundColor ? "#6C2537" : "#C4CED5",
                   }}
                 >
                   <div>
                     <h3>{item.data.title}</h3>
-                    <PrismicNextImage field={item.data.preview_image?.url ? item.data.preview_image : item.data.image} />
-                    <div className="date-time" style={{borderColor: backgroundColor ? '#6C2537' : '#C4CED5'}}>
+                    <PrismicNextImage
+                      field={
+                        item.data.preview_image?.url
+                          ? item.data.preview_image
+                          : item.data.image
+                      }
+                    />
+                    <div
+                      className="date-time"
+                      style={{
+                        borderColor: backgroundColor
+                          ? "#6C2537"
+                          : "#C4CED5",
+                      }}
+                    >
                       <p>
                         {item.data.dates
                           ? item.data.dates
@@ -125,11 +153,17 @@ const Programma = ({ page, navigation, events }) => {
                       </p>
                       <p>{item.data.time}</p>
                     </div>
-                    <PrismicRichText field={item.data.intro?.length ? item.data.intro : item.data.description} />
+                    <PrismicRichText
+                      field={
+                        item.data.intro?.length
+                          ? item.data.intro
+                          : item.data.description
+                      }
+                    />
                   </div>
                   <div className="buttons">
                     <Link href={`programma/${item.uid}`}>
-                      {page.lang == 'en-us' ? 'Read more' : 'Lees meer'}
+                      {page.lang === "en-us" ? "Read more" : "Lees meer"}
                     </Link>
                   </div>
                 </a>

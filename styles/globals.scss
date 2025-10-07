@@ -285,18 +285,18 @@ h3{
   max-width: 100%;
   position: relative;
   svg{
-    // width: 90vw;
+    width: 900px;
     min-height: 180px;
     max-height: 200px;
     margin-left: 3%;
-    max-width: 900px;
+    max-width: 90vw;
     margin-top: 24px;
   }
 }
 
 #about .page-title.logo-hero{
   svg{
-    width: 90vw;
+    width: 50vw;
     max-height: 100%;
   }
 }

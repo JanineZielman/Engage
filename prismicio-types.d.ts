@@ -75,6 +75,16 @@ type ContentRelationshipFieldWithData<
  */
 export interface EventDocumentDataFilterItem {
   /**
+   * Group field in *Event → Filter*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.filter[].group
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  group: prismic.KeyTextField;
+
+  /**
    * Filter field in *Event → Filter*
    *
    * - **Field Type**: Text
