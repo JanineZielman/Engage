@@ -20,7 +20,13 @@ const Page = ({ page, navigation }) => {
     <div className="page event-page">
       <Layout menu={navigation.results[0].data} page={page}>
         <div className="flex-intro">
+          {page.data.video?.url ?
+          <video playsInline autoPlay muted loop>
+            <source src={page.data.video.url} type="video/mp4"/>
+          </video>
+          :
            <PrismicNextImage field={page.data.image} />
+          }
            <div className="text-wrapper">
             <h2>{page.data.title}</h2>
             <h3>{page.data.subtitle}</h3>
@@ -32,6 +38,9 @@ const Page = ({ page, navigation }) => {
             <SliceZone slices={page.data.slices} components={components} />
           </div>
         </div>
+        <div className="iframe"
+          dangerouslySetInnerHTML={{ __html: page.data.embed?.html }}
+        />
         <div className={`columns ${page.data.long_description2.length > 0 ? 'amount-2': 'amount-1'}`}>
           <div className="column">
             <PrismicRichText field={page.data.long_description} />

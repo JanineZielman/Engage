@@ -47,6 +47,15 @@
           "thumbnails": []
         }
       },
+      "video": {
+        "type": "Link",
+        "config": {
+          "label": "Video",
+          "placeholder": "",
+          "select": "media",
+          "allowText": true
+        }
+      },
       "dates": {
         "type": "Text",
         "config": {
@@ -114,6 +123,13 @@
               }
             }
           }
+        }
+      },
+      "embed": {
+        "type": "Embed",
+        "config": {
+          "label": "Embed",
+          "placeholder": ""
         }
       },
       "long_description": {

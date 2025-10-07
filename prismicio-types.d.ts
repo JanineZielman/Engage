@@ -156,6 +156,17 @@ interface EventDocumentData {
   image: prismic.ImageField<never>;
 
   /**
+   * Video field in *Event*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.video
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link-to-media
+   */
+  video: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
    * Date(s) field in *Event*
    *
    * - **Field Type**: Text
@@ -220,6 +231,17 @@ interface EventDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   filter: prismic.GroupField<Simplify<EventDocumentDataFilterItem>>;
+
+  /**
+   * Embed field in *Event*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.embed
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/embed
+   */
+  embed: prismic.EmbedField;
 
   /**
    * Long description (Left) field in *Event*
