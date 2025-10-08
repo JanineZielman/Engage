@@ -1096,10 +1096,13 @@ p a{
   margin-left: 2vw;
   margin-top: 24px;
   display: flex;
+  flex-wrap: wrap;
   div{
     margin-right: 1.5%;
     cursor: pointer;
     font-weight: 100;
+    line-height: 1.5;
+    white-space: nowrap;
     &.active{
       font-weight: 500;
     }
@@ -1160,6 +1163,22 @@ footer{
     .event-item{
       width: 100%;
       margin-bottom: 48px;
+    }
+  }
+  .filter-buttons{
+    // flex-direction: column;
+    justify-content: space-between;
+    div{
+      // width: 40%;
+      margin-right: 20%;
+      margin-bottom: 14px;
+    }
+    .filter-group{
+      margin-bottom: 0;
+      width: 40%;
+      div{
+        margin-bottom: 0;
+      }
     }
   }
   .team-grid{

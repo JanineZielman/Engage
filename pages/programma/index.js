@@ -91,34 +91,54 @@ const Programma = ({ page, navigation, events }) => {
               onClick={() => setFilter("aankomend")}
               className={`${filter === "aankomend" ? "active" : ""}`}
             >
-              Aankomend
+              {page.lang === "nl-nl" ? "Aankomend" : "Upcoming"}
             </div>
             <div
               onClick={() => setFilter("afgelopen")}
               className={`${filter === "afgelopen" ? "active" : ""}`}
             >
-              Verleden
+              {page.lang === "nl-nl" ? "Verleden" : "Past"}
             </div>
 
             {/* Grouped filters */}
-            {Object.entries(groupedFilters).map(([group, filters]) => (
-              <div key={group} className="filter-group">
-                <details>
-                  <summary>{group}</summary>
-                  <div className="dropdown-content">
-                    {[...filters].map((f) => (
-                      <div
-                        key={f}
-                        onClick={() => setFilter(f)}
-                        className={`${filter === f ? "active" : ""}`}
-                      >
-                        {f}
-                      </div>
-                    ))}
+            {Object.entries(groupedFilters).map(([group, filters]) => {
+              const filtersArray = [...filters];
+
+              // If only one filter in the group, show it as a direct button
+              if (filtersArray.length === 1) {
+                const f = filtersArray[0];
+                return (
+                  <div key={f} className="filter-group">
+                    <div
+                      onClick={() => setFilter(f)}
+                      className={`${filter === f ? "active" : ""}`}
+                    >
+                      {f}
+                    </div>
                   </div>
-                </details>
-              </div>
-            ))}
+                );
+              }
+
+              // Otherwise, show as dropdown
+              return (
+                <div key={group} className="filter-group">
+                  <details>
+                    <summary>{group}</summary>
+                    <div className="dropdown-content">
+                      {filtersArray.map((f) => (
+                        <div
+                          key={f}
+                          onClick={() => setFilter(f)}
+                          className={`${filter === f ? "active" : ""}`}
+                        >
+                          {f}
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+              );
+            })}
           </div>
 
           {/* EVENTS GRID */}

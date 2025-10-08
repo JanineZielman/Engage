@@ -28,8 +28,6 @@ export const Layout = ({ menu, children, page }) => {
 
   const handleLinkClick = () => setMobileOpen(false);
 
-  console.log(menu)
-
 
   return (
     <>
