@@ -66,7 +66,16 @@ const Programma = ({ page, navigation, events }) => {
   // --- 4️⃣ Sort by date (newest first) ---
   const sortedItems = filteredItems.sort((a, b) => a.parsedDate - b.parsedDate);
 
-  // --- 5️⃣ Date formatting helper ---
+  // --- 5️⃣ Split grouped filters into dropdowns vs singles ---
+  const dropdownGroups = Object.entries(groupedFilters)
+    .filter(([_, filters]) => filters.size > 1)
+    .sort(([a], [b]) => a.localeCompare(b)); // sort dropdown groups alphabetically
+
+  const singleGroups = Object.entries(groupedFilters)
+    .filter(([_, filters]) => filters.size === 1)
+    .sort(([a], [b]) => a.localeCompare(b)); // sort single filters alphabetically
+
+  // --- 6️⃣ Date formatting helper ---
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     if (isNaN(date)) return dateString;
@@ -77,7 +86,7 @@ const Programma = ({ page, navigation, events }) => {
     });
   };
 
-  // --- 6️⃣ JSX ---
+  // --- 7️⃣ JSX ---
   return (
     <div className="page">
       <Layout menu={navigation.results[0].data} page={page}>
@@ -100,26 +109,11 @@ const Programma = ({ page, navigation, events }) => {
               {page.lang === "nl-nl" ? "Verleden" : "Past"}
             </div>
 
-            {/* Grouped filters */}
-            {Object.entries(groupedFilters).map(([group, filters]) => {
-              const filtersArray = [...filters];
-
-              // If only one filter in the group, show it as a direct button
-              if (filtersArray.length === 1) {
-                const f = filtersArray[0];
-                return (
-                  <div key={f} className="filter-group">
-                    <div
-                      onClick={() => setFilter(f)}
-                      className={`${filter === f ? "active" : ""}`}
-                    >
-                      {f}
-                    </div>
-                  </div>
-                );
-              }
-
-              // Otherwise, show as dropdown
+            {/* Dropdown filters (alphabetical by group, and their items too) */}
+            {dropdownGroups.map(([group, filters]) => {
+              const filtersArray = [...filters].sort((a, b) =>
+                a.localeCompare(b)
+              );
               return (
                 <div key={group} className="filter-group">
                   <details>
@@ -136,6 +130,21 @@ const Programma = ({ page, navigation, events }) => {
                       ))}
                     </div>
                   </details>
+                </div>
+              );
+            })}
+
+            {/* Single filters (alphabetical after dropdowns) */}
+            {singleGroups.map(([group, filters]) => {
+              const f = [...filters][0];
+              return (
+                <div key={f} className="filter-group">
+                  <div
+                    onClick={() => setFilter(f)}
+                    className={`${filter === f ? "active" : ""}`}
+                  >
+                    {f}
+                  </div>
                 </div>
               );
             })}
@@ -158,7 +167,8 @@ const Programma = ({ page, navigation, events }) => {
                     cursor: "pointer",
                     backgroundColor: backgroundColor,
                     color: backgroundColor
-                      ? backgroundColor === "#3E2602" || backgroundColor === "#6C2537"
+                      ? backgroundColor === "#3E2602" ||
+                        backgroundColor === "#6C2537"
                         ? "#C4CED5"
                         : "#6C2537"
                       : "#C4CED5",
@@ -178,7 +188,8 @@ const Programma = ({ page, navigation, events }) => {
                       className="date-time"
                       style={{
                         borderColor: backgroundColor
-                          ? backgroundColor === "#3E2602" || backgroundColor === "#6C2537"
+                          ? backgroundColor === "#3E2602" ||
+                            backgroundColor === "#6C2537"
                             ? "#C4CED5"
                             : "#6C2537"
                           : "#C4CED5",
